@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             // $table->timestamp('email_verified_at')->nullable();
-            $table->integer('matricula');
+            $table->integer('registration');
             $table->string('password');
-            $table->string('tipoUsuario');
+            $table->string('userType');
             $table->foreignId('information_id')->nullable()->index();
             $table->rememberToken();
             $table->timestamps();
@@ -31,6 +31,7 @@ return new class extends Migration
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('ip_address', 45)->nullable();
+            $table->foreignId('user_id')->nullable();
             $table->text('user_agent')->nullable();
             $table->longText('payload');
             $table->integer('last_activity')->index();
