@@ -16,11 +16,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('surname');
             $table->string('email')->unique();
-            $table->date('birthdate');
+            $table->date('birthDate');
             $table->string('gender');
             $table->string('cpf');
             $table->integer('registration');
             $table->string('schoolYear')->nullable();
+            $table->string('schoolClass_id')->nullable();
             $table->timestamps();
         });
     }

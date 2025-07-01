@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('subject_id')->nullable();
             $table->integer('quarter');
             $table->float('firstTest');
-            $table->float('secondTest2');
+            $table->float('secondTest');
             $table->timestamps();
         });
     }
