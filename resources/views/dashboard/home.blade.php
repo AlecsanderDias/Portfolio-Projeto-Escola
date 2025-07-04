@@ -8,6 +8,9 @@
             {{ $item }}
         @endforeach
     @endisset
+    <a href="{{ route('user.create') }}">
+        <button>Create User</button>
+    </a>
     <form action="{{ route('logout') }}" method="post">
         @csrf
         <button type="submit">Logout</button>
