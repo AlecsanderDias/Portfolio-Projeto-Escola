@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUserInformationRequest;
 use Illuminate\Http\Request;
 
 class UserInformationController extends Controller
@@ -25,8 +26,9 @@ class UserInformationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateUserInformationRequest $request)
     {
+        
         dd($request->all());
     }
 
