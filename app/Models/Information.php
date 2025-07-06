@@ -19,7 +19,6 @@ class Information extends Model
         'cpf',
         'registration',
         'schoolYear',
-        'user_id',
         'class_id'
     ];
 
