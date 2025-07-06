@@ -1,10 +1,13 @@
-@if(isset($error))
+@if($errors->any())
     <ul class="alert alert-danger">
-        @foreach ($error as $item)
-            {{ $item }}
+        @foreach ($errors->all() as $item)
+            <li class="list-group-item">
+                {{ $item }}
+            </li>
         @endforeach
     </ul>
-@else
+@endif
+@if(isset($message))
     <ul class="alert alert-success">
         @foreach ($message as $item)
             {{ $item }}

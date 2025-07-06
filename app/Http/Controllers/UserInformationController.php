@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserInformationRequest;
+use App\Models\Information;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 
 class UserInformationController extends Controller
 {
@@ -28,8 +31,26 @@ class UserInformationController extends Controller
      */
     public function store(CreateUserInformationRequest $request)
     {
-        
-        dd($request->all());
+        $pass = generatePassword(7);
+        $registration = generateStudentId();
+        $info = Information::create([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'email' => $request->email,
+            'birthdate' => Date::now(),
+            'gender' => $request->gender,
+            'cpf' => $request->cpf,
+            'registration' => $registration,
+            'schoolYear' => null,
+            'class_id' => null
+        ]);
+        $user = User::create([
+            'registration' => $registration,
+            'password' => $pass,
+            'userType' => $request->userType,
+            'information_id' => $info->id,
+        ]);
+        dd($user);
     }
 
     /**
