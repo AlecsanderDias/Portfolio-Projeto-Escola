@@ -8,18 +8,24 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Information extends Model
 {
     /**
+     *
+     * @var string
+     */
+    protected $table = 'informations';
+
+    /**
      * @var list<string>
     */
     protected $fillable = [
         'name',
         'surname',
         'email',
-        'birthdate',
+        'birthDate',
         'gender',
         'cpf',
         'registration',
         'schoolYear',
-        'class_id'
+        'schoolClass_id'
     ];
 
     /**
@@ -27,7 +33,7 @@ class Information extends Model
      */
     protected $attributes = [
         'schoolYear' => null,
-        'class_id' => null
+        'schoolClass_id' => null
     ];
 
     public function users():BelongsTo {
