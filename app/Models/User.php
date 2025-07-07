@@ -23,6 +23,7 @@ class User extends Authenticatable
         'registration',
         'password',
         'userType',
+        'information_id'
     ];
 
     /**

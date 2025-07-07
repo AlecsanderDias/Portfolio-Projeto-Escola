@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserInformationRequest;
+use App\Http\Requests\UpdateUserInformationRequest;
 use App\Models\Information;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,7 +16,9 @@ class UserInformationController extends Controller
      */
     public function index()
     {
-        //
+        $informations = Information::all();
+        // dd($informations);
+        return view('user.index', ['informations' => $informations]);
     }
 
     /**
@@ -37,12 +40,10 @@ class UserInformationController extends Controller
             'name' => $request->name,
             'surname' => $request->surname,
             'email' => $request->email,
-            'birthdate' => Date::now(),
+            'birthDate' => Date::now(),
             'gender' => $request->gender,
             'cpf' => $request->cpf,
             'registration' => $registration,
-            'schoolYear' => null,
-            'class_id' => null
         ]);
         $user = User::create([
             'registration' => $registration,
@@ -50,7 +51,8 @@ class UserInformationController extends Controller
             'userType' => $request->userType,
             'information_id' => $info->id,
         ]);
-        dd($user);
+        // dd($user, $pass, $registration, $info);
+        return redirect('user.index');
     }
 
     /**
@@ -66,13 +68,15 @@ class UserInformationController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::find();
+        $info = Information::find();
+        return view('user.updateUserForm', ['user' => $user, 'info' => $info]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserInformationRequest $request, string $id)
     {
         //
     }

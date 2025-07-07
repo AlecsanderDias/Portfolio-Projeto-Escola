@@ -10,4 +10,4 @@ Route::get('/login', [LoginController::class, 'enter'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/dashboard', [LoginController::class, 'home'])->middleware('auth');
-Route::resource('/user', UserInformationController::class);
+Route::resource('/user', UserInformationController::class)->middleware('auth');
