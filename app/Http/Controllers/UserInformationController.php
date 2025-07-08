@@ -16,8 +16,9 @@ class UserInformationController extends Controller
      */
     public function index()
     {
-        $informations = Information::all();
-        // dd($informations);
+        $fields = ['id','name','surname','email','birthDate','gender','cpf','registration','schoolYear','schoolClass_id'];
+        $informations = Information::all($fields)->toArray();
+        // dd($informations, $informations[0]);
         return view('user.index', ['informations' => $informations]);
     }
 
@@ -68,9 +69,13 @@ class UserInformationController extends Controller
      */
     public function edit(string $id)
     {
-        $user = User::find();
-        $info = Information::find();
-        return view('user.updateUserForm', ['user' => $user, 'info' => $info]);
+        $info = Information::find($id)->get([]);
+        $user = User::where('information_id',$id)->get();
+        // dd($info, $user);
+        $userFields = ['id','userType','information_id'];
+        $informationFields = ['id','name','surname','email','birthDate','gender','cpf','registration','schoolYear','schoolClass_id'];
+        $data = [];
+        return view('user.updateUserForm', ['data' => $data]);
     }
 
     /**
@@ -78,7 +83,7 @@ class UserInformationController extends Controller
      */
     public function update(UpdateUserInformationRequest $request, string $id)
     {
-        //
+        dd($request);
     }
 
     /**
