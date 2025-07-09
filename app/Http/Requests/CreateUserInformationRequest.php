@@ -24,8 +24,8 @@ class CreateUserInformationRequest extends FormRequest
         return [
             'name' => 'required|min:3|max:20',
             'surname' => 'required|min:3|max:40',
-            'email' => 'required|email|min:7|max:30|unique',
-            'cpf' => 'required|digits:11|unique',
+            'email' => 'required|email|min:7|max:30|unique:informations',
+            'cpf' => 'required|digits:11|unique:informations',
         ];
     }
 

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('lesson_id')->nullable();
             $table->char('attendance', 1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

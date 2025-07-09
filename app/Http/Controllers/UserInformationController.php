@@ -18,7 +18,6 @@ class UserInformationController extends Controller
     {
         $fields = ['id','name','surname','email','birthDate','gender','cpf','registration','schoolYear','schoolClass_id'];
         $informations = Information::all($fields)->toArray();
-        // dd($informations, $informations[0]);
         return view('user.index', ['informations' => $informations]);
     }
 
@@ -52,8 +51,7 @@ class UserInformationController extends Controller
             'userType' => $request->userType,
             'information_id' => $info->id,
         ]);
-        // dd($user, $pass, $registration, $info);
-        return redirect('user.index');
+        return redirect()->route('user.index');
     }
 
     /**
@@ -69,21 +67,24 @@ class UserInformationController extends Controller
      */
     public function edit(string $id)
     {
-        $info = Information::find($id)->get([]);
-        $user = User::where('information_id',$id)->get();
-        // dd($info, $user);
         $userFields = ['id','userType','information_id'];
         $informationFields = ['id','name','surname','email','birthDate','gender','cpf','registration','schoolYear','schoolClass_id'];
-        $data = [];
+        $info = Information::get($informationFields)->find($id)->toArray();
+        $user = User::where('information_id',$id)->get($userFields)->toArray();
+        $data = [...$info, ...$user[0]];
         return view('user.updateUserForm', ['data' => $data]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserInformationRequest $request, string $id)
+    public function update(UpdateUserInformationRequest $request, User $user)
     {
-        dd($request);
+        $updateUser = new User($request->all());
+        $updateInfo = new Information($request->all());
+        User::find($user->id)->update($updateUser->getAttributes());
+        Information::find($user->information_id)->update($updateInfo->getAttributes());
+        return redirect()->route('user.index');
     }
 
     /**
@@ -91,6 +92,9 @@ class UserInformationController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::find($id);
+        Information::find($user->information_id)->delete();
+        $user->delete();
+        return redirect()->route('user.index');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateUserInformationRequest extends FormRequest
 {
@@ -24,8 +25,12 @@ class UpdateUserInformationRequest extends FormRequest
         return [
             'name' => 'required|min:3|max:20',
             'surname' => 'required|min:3|max:40',
-            'email' => 'required|email|min:7|max:30|unique:informations,email',
-            'cpf' => 'required|digits:11|unique:informations,cpf',
+            'email' => [
+                'required', 'email', 'min:7', 'max:30', Rule::unique('informations')->ignore($this->user->information_id),
+            ],
+            'cpf' => [
+                'required', 'digits:11', Rule::unique('informations')->ignore($this->user->information_id),
+            ],
         ];
     }
 

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('schoolYear')->nullable();
             $table->string('schoolClass_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
