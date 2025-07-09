@@ -19,6 +19,7 @@ return new class extends Migration
             $table->float('firstTest');
             $table->float('secondTest');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

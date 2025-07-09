@@ -18,6 +18,7 @@ return new class extends Migration
             $table->year('year');
             $table->string('schoolYear');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
