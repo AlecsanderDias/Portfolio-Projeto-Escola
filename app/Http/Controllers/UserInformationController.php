@@ -16,9 +16,24 @@ class UserInformationController extends Controller
      */
     public function index()
     {
-        $fields = ['id','name','surname','email','birthDate','gender','cpf','registration','schoolYear','schoolClass_id'];
-        $informations = Information::all($fields)->toArray();
-        return view('user.index', ['informations' => $informations]);
+
+        $data = User::join('informations','users.information_id','=','informations.id')
+            ->select([
+                'users.registration','users.userType',
+                'informations.name','informations.surname',
+                'informations.email','informations.birthDate',
+                'informations.gender','informations.cpf',
+                'informations.schoolYear','informations.schoolClass_id',
+                'informations.id'
+                ])->get()->toArray();
+        // dd($data, $data[0]['id']);
+
+        // $userFields = ['id','registration', 'userType','information_id'];
+        // $informationFields = ['id','name','surname','email','birthDate','gender','cpf','schoolYear','schoolClass_id'];
+        // $info = Information::get($informationFields)->all()->toArray();
+        // $user = User::where('information_id',$id)->get($userFields)->toArray();
+        // $informations = [...$info, ...$user[0]];
+        return view('user.index', ['data' => $data]);
     }
 
     /**
@@ -26,7 +41,7 @@ class UserInformationController extends Controller
      */
     public function create()
     {
-        return view('user.createUserForm');
+        return view('user.createForm');
     }
 
     /**
@@ -35,7 +50,7 @@ class UserInformationController extends Controller
     public function store(CreateUserInformationRequest $request)
     {
         $pass = generatePassword(7);
-        $registration = generateStudentId();
+        $registration = generateRegistration($request->userType);
         $info = Information::create([
             'name' => $request->name,
             'surname' => $request->surname,
@@ -43,7 +58,6 @@ class UserInformationController extends Controller
             'birthDate' => Date::now(),
             'gender' => $request->gender,
             'cpf' => $request->cpf,
-            'registration' => $registration,
         ]);
         $user = User::create([
             'registration' => $registration,
@@ -51,7 +65,7 @@ class UserInformationController extends Controller
             'userType' => $request->userType,
             'information_id' => $info->id,
         ]);
-        return redirect()->route('user.index');
+        return redirect()->route('user.index')->with('messge', "O número de Registro é ($registration) e a senha ($pass)");
     }
 
     /**
@@ -67,12 +81,12 @@ class UserInformationController extends Controller
      */
     public function edit(string $id)
     {
-        $userFields = ['id','userType','information_id'];
-        $informationFields = ['id','name','surname','email','birthDate','gender','cpf','registration','schoolYear','schoolClass_id'];
+        $userFields = ['id','registration', 'userType','information_id'];
+        $informationFields = ['id','name','surname','email','birthDate','gender','cpf','schoolYear','schoolClass_id'];
         $info = Information::get($informationFields)->find($id)->toArray();
         $user = User::where('information_id',$id)->get($userFields)->toArray();
         $data = [...$info, ...$user[0]];
-        return view('user.updateUserForm', ['data' => $data]);
+        return view('user.updateForm', ['data' => $data]);
     }
 
     /**

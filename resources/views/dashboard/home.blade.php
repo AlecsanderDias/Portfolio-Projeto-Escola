@@ -8,8 +8,11 @@
             {{ $item }}
         @endforeach
     @endisset
-    <a href="{{ route('user.create') }}">
-        <button>Create User</button>
+    <a href="{{ route('user.index') }}">
+        <button>Usuários</button>
+    </a>
+    <a href="{{ route('schoolClass.index') }}">
+        <button>Turmas</button>
     </a>
     <form action="{{ route('logout') }}" method="post">
         @csrf

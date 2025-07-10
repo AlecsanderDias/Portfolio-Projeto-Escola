@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Creating User')
+@section('title', 'Criando Usuário')
 
 @section('content')
     <form action="/user" method="POST" class="">
