@@ -19,7 +19,6 @@ return new class extends Migration
             $table->date('birthDate');
             $table->string('gender');
             $table->string('cpf');
-            $table->integer('registration');
             $table->string('schoolYear')->nullable();
             $table->string('schoolClass_id')->nullable();
             $table->timestamps();

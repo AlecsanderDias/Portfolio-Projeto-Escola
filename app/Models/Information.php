@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Information extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, HasFactory;
     /**
      *
      * @var string
@@ -25,7 +27,6 @@ class Information extends Model
         'birthDate',
         'gender',
         'cpf',
-        'registration',
         'schoolYear',
         'schoolClass_id'
     ];
@@ -38,8 +39,8 @@ class Information extends Model
         'schoolClass_id' => null
     ];
 
-    public function users():BelongsTo {
-        return $this->belongsTo(User::class);
+    public function user():HasOne {
+        return $this->hasOne(User::class, 'information_id');
     }
 
     public function schoolClasses():BelongsTo {

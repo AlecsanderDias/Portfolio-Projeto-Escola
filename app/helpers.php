@@ -8,6 +8,28 @@
         }
     }
 
+    if( !function_exists('generateRegistration')) {
+        function generateRegistration($type):int {
+            switch($type) {
+                case 'student':
+                    return generateStudentId();
+                break;
+                case 'teacher':
+                    return generateTeacherId();
+                break;
+                case 'worker':
+                    return generateWorkerId();
+                break;
+                case 'administrator':
+                    return generateAdminId();
+                break;
+                default:
+                    return 0;
+                break;
+            }
+        }
+    }
+
     if( !function_exists('generateStudentId')) {
         function generateStudentId() {
             return rand(

@@ -6,7 +6,7 @@
     <form action="/login" method="POST" class="">
         @csrf
         <div>
-            <label for="registration">Registration Number:</label>
+            <label for="registration">Matrícula:</label>
             <input type="text" name="registration" id="registration"/>
         </div>
         <div>
