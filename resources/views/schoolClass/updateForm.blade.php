@@ -1,13 +1,14 @@
 @extends('layout')
 
-@section('title','Criar Turma')
+@section('title','Atualizar Turma')
 
 @section('content')
-    <form action="{{ route('schoolClass.store') }}" method="POST">
+    <form action="{{ route('schoolClass.update', $schoolClass->id) }}" method="POST">
+        @method('PUT')
         @csrf
         <div>
             <label for="className">Nome da Turma:</label>
-            <input type="text" name="className" id="className" value="{{ old('className') }}"/>
+            <input type="text" name="className" id="className" value="{{ $schoolClass->className }}"/>
         </div>
         <div>
             <label for="year">Ano Letivo:</label>
@@ -31,6 +32,6 @@
                 <option value="33">33</option>
             </select>
         </div>
-        <button type="submit">Criar</button>
+        <button type="submit">Salvar</button>
     </form>
 @endsection
