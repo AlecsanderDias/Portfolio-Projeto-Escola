@@ -7,9 +7,9 @@
         @endforeach
     </ul>
 @endif
-@if(isset($message))
+@if(session('message'))
     <ul class="alert alert-success">
-        @foreach ($message as $item)
+        @foreach (session('message') as $item)
             {{ $item }}
         @endforeach
     </ul>

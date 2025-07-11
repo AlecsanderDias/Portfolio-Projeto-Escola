@@ -1,20 +1,20 @@
 @extends('layout')
 
-@section('title', 'School Classes')
+@section('title', 'Turmas')
 
 @section('content')
     <h2>Turmas</h2>
-    @if(!empty($informations))
+    @if(!empty($schoolClasses))
         <ul>
             @foreach ($schoolClasses as $classes)
                 <li>
                     @foreach ($classes as $item)
                         {{ $item }}
                     @endforeach
-                    <a href="{{ route('schoolClass.edit', $classes->id) }}">
+                    <a href="{{ route('schoolClass.edit', $classes['id']) }}">
                         <button>Editar</button>
                     </a>
-                    <form action="{{ route('schoolClass.destroy', $classes->id) }}" method="POST">
+                    <form action="{{ route('schoolClass.destroy', $classes['id']) }}" method="POST">
                         @method('DELETE')
                         @csrf
                         <button type="submit">Deletar</button>

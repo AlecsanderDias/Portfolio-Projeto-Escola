@@ -15,7 +15,7 @@ class SchoolClass extends Model
     // /**
     //  * @var string
     //  */
-    // protected $table = 'schoolClasses';
+    // protected $table = 'school_classes';
 
     /**
      * @var list<string>

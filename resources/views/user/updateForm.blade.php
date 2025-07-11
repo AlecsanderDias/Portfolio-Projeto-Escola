@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Atualizando Usuário')
+@section('title', 'Atualizar Usuário')
 
 @section('content')
     <form action="{{ route('user.update', $data['id']) }}" method="POST" class="">
