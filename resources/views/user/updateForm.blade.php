@@ -19,8 +19,8 @@
             <input type="email" name="email" id="email" value="{{ $data['email'] }}"/>
         </div>
         <div>
-            <label for="birthDate">Data de Nascimento:</label>
-            <input type="text" name="birthDate" id="birthDate" value="{{ $data['birthDate'] }}"/>
+            <label for="birth_date">Data de Nascimento:</label>
+            <input type="text" name="birth_date" id="birth_date" value="{{ $data['birth_date'] }}"/>
         </div>
         <div>
             <label for="gender">Sexo:</label>
@@ -37,18 +37,18 @@
             <label for="registration">Registration: {{ $data['registration'] }} </label>
         </div>
         <div>
-            <label for="userType">Tipo de Usuário:</label>
-            <select name="userType" id="userType" value="{{ $data['userType'] }}">
+            <label for="user_type">Tipo de Usuário:</label>
+            <select name="user_type" id="user_type" value="{{ $data['user_type'] }}">
                 <option value="student" selected>Estudante</option>
                 <option value="teacher">Professor</option>
                 <option value="worker">Funcionário</option>
                 <option value="administrator">Administrador</option>
             </select>
         </div>
-        @if($data['userType'] == 'student')
+        @if($data['user_type'] == 'student')
         <div>
-            <label for="schoolYear">Série:</label>
-            <select name="schoolYear" id="schoolYear">
+            <label for="school_year">Série:</label>
+            <select name="school_year" id="school_year">
                 <option value="{{ null }}"></option>
                 <option value="1">1º Ano</option>
                 <option value="2">2º Ano</option>
@@ -56,8 +56,8 @@
             </select>
         </div>
         <div>
-            <label for="schoolClass_id">Turma:</label>
-            <select name="schoolClass_id" id="schoolClass_id">
+            <label for="schoolclass_id">Turma:</label>
+            <select name="schoolclass_id" id="schoolclass_id">
                 <option value="{{ null }}"></option>
                 <option value="101">101</option>
                 <option value="201">201</option>

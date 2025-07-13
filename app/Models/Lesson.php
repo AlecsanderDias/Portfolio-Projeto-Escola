@@ -24,7 +24,7 @@ class Lesson extends Model
      */
     protected $attributes = [
         'subject_id',
-        'schoolClass_id'
+        'schoolclass_id'
     ];
 
     public function subjects():BelongsTo {

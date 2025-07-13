@@ -22,7 +22,7 @@ class InformationFactory extends Factory
             'name' => fake()->firstName(),
             'surname' => fake()->lastName(),
             'email' => fake()->unique()->email(),
-            'birthDate' => fake()->date(),
+            'birth_date' => fake()->date(),
             'gender' => $gender[rand(0,1)],
             'cpf' => $cpf,
         ];

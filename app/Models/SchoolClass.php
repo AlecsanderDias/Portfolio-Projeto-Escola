@@ -21,9 +21,9 @@ class SchoolClass extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'className',
+        'class_name',
         'year',
-        'schoolYear',
+        'school_year',
         'room'
     ];
 

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('teacher_id')->nullable();
             $table->string('name');
-            $table->integer('subjectHours');
+            $table->integer('subject_hours');
             $table->timestamps();
             $table->softDeletes();
         });

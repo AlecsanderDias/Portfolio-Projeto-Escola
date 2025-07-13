@@ -15,7 +15,7 @@ class UserInformationSeeder extends Seeder
     public function run(): void
     {
         User::factory()
-            ->count(5)
+            ->count(env('USER_INFORMATION_SEEDER',10))
             ->has(Information::factory()->count(1))
             ->create();
     }

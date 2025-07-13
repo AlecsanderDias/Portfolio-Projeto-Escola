@@ -16,11 +16,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('surname');
             $table->string('email')->unique();
-            $table->date('birthDate');
+            $table->date('birth_date');
             $table->string('gender');
             $table->string('cpf');
-            $table->string('schoolYear')->nullable();
-            $table->string('schoolClass_id')->nullable();
+            $table->string('school_year')->nullable();
+            $table->string('schoolclass_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

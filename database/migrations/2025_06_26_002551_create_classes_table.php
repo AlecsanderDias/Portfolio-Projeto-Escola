@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('school_classes', function (Blueprint $table) {
             $table->id();
-            $table->string('className');
+            $table->string('class_name');
             $table->string('room');
             $table->year('year');
-            $table->string('schoolYear');
+            $table->string('school_year');
             $table->timestamps();
             $table->softDeletes();
         });
