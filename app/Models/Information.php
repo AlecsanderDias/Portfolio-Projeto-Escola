@@ -24,19 +24,19 @@ class Information extends Model
         'name',
         'surname',
         'email',
-        'birthDate',
+        'birth_date',
         'gender',
         'cpf',
-        'schoolYear',
-        'schoolClass_id'
+        'school_year',
+        'schoolclass_id'
     ];
 
     /**
      * @var array
      */
     protected $attributes = [
-        'schoolYear' => null,
-        'schoolClass_id' => null
+        'school_year' => null,
+        'schoolclass_id' => null
     ];
 
     public function user():HasOne {

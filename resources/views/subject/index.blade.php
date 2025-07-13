@@ -25,9 +25,6 @@
     @else
         <p>Não há disciplinas no sistema!</p>
     @endif
-    @isset($teachers)
-        @dd($teachers)
-    @endisset
     <a href="{{ route('subject.create') }}">
         <button>Criar Disciplina</button>
     </a>

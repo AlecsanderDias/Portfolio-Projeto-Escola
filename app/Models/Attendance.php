@@ -22,7 +22,7 @@ class Attendance extends Model
      */
     protected $attributes = [
         'student_id' => null,
-        'schoolClass_id' => null
+        'schoolclass_id' => null
     ];
 
     public function users():BelongsTo {

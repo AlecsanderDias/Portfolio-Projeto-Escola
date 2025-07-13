@@ -29,7 +29,7 @@ class UserFactory extends Factory
         return [
             'registration' => generateRegistration($type[$res]),
             'password' => static::$password ??= Hash::make('password'),
-            'userType' => $type[$res],
+            'user_type' => $type[$res],
             'information_id' => Information::factory(),
         ];
     }

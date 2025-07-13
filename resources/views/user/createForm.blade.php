@@ -18,8 +18,8 @@
             <input type="email" name="email" id="email" value="{{ old('email') }}"/>
         </div>
         <div>
-            <label for="birthDate">Data de Nascimento:</label>
-            <input type="text" name="birthDate" id="birthDate" value="{{ old('birthDate') }}"/>
+            <label for="birth_date">Data de Nascimento:</label>
+            <input type="text" name="birth_date" id="birth_date" value="{{ old('birth_date') }}"/>
         </div>
         <div>
             <label for="gender">Sexo:</label>
@@ -33,8 +33,8 @@
             <input type="text" name="cpf" id="cpf" value="{{ old('cpf') }}"/>
         </div>
         <div>
-            <label for="userType">Tipo de Usuário:</label>
-            <select name="userType" id="userType" value="{{ old('userType') }}">
+            <label for="user_type">Tipo de Usuário:</label>
+            <select name="user_type" id="user_type" value="{{ old('user_type') }}">
                 <option value="student" selected>Estudante</option>
                 <option value="teacher">Professor</option>
                 <option value="worker">Funcionário</option>

@@ -18,12 +18,12 @@ class SchoolClassFactory extends Factory
     {
         $room = rand(10,99);
         $year = rand(2021,2025);
-        $schoolYear = rand(1,10);
+        $school_year = rand(1,10);
         return [
-            'className' => fake()->text(10),
+            'class_name' => fake()->text(10),
             'room' => $room,
             'year' => $year,
-            'schoolYear' => $schoolYear
+            'school_year' => $school_year
         ];
     }
 }

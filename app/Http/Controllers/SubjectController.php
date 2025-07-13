@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants;
+use App\Http\Requests\CreateSubjectRequest;
 use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,9 +15,13 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subjects = Subject::all()->toArray();
-        $teachers = User::join('information','users.information_id','=','informations.id')->select(['users.registration','informations.name','informations.surname'])->where('users.userType','=','teacher');
-        return view('subject.index', ['subjects' => $subjects, 'teachers' => $teachers]);
+        $subjects = Subject::join('users','subjects.teacher_id','=','users.id')
+            ->join('informations','informations.id','=','users.information_id')
+            ->select([
+                'subjects.id','subjects.name AS subject_name' ,'subjects.subject_hours','subjects.teacher_id',
+                'informations.name AS teacher_name', 'informations.surname', 'users.registration'
+                ])->get()->toArray();
+        return view('subject.index', ['subjects' => $subjects]);
     }
 
     /**
@@ -23,14 +29,16 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        return view('subject.createForm');
+        $teachers = User::join('informations','users.information_id','=','informations.id')->select('users.id','users.registration','informations.name','informations.surname')->where('users.user_type','=','teacher')->get();
+        return view('subject.createForm', ['teachers' => $teachers, 'subjectHours' => Constants::SUBJECT_HOURS]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateSubjectRequest $request)
     {
+        // dd($request->all());
         $subject = Subject::create($request->all());
         return redirect()->route('subject.index')->with('message',["Nova disciplina $subject->name criada com sucesso!"]);
     }
@@ -48,7 +56,9 @@ class SubjectController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $subject = Subject::find($id);
+        $teachers = User::join('informations','users.information_id','=','informations.id')->select('users.id','users.registration','informations.name','informations.surname')->where('users.user_type','=','teacher')->get();
+        return view('subject.updateForm', ['subject' => $subject, 'teachers' => $teachers, 'subjectHours' => Constants::SUBJECT_HOURS]);
     }
 
     /**
@@ -56,7 +66,9 @@ class SubjectController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $subject = new Subject($request->all());
+        Subject::find($id)->update($subject->getAttributes());
+        return redirect()->route('subject.index')->with('message', ["A Disciplina $subject->name com id => $id foi alterada com sucesso!"]);
     }
 
     /**
@@ -66,6 +78,6 @@ class SubjectController extends Controller
     {
         $subject = Subject::find($id);
         $subject->delete();
-        return redirect()->route('subject.index')->with('message', ["A Disciplina $subject->name com $id foi deletada com sucesso!"]);
+        return redirect()->route('subject.index')->with('message', ["A Disciplina $subject->name com id => $id foi deletada com sucesso!"]);
     }
 }

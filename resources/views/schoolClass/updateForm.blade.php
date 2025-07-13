@@ -7,8 +7,8 @@
         @method('PUT')
         @csrf
         <div>
-            <label for="className">Nome da Turma:</label>
-            <input type="text" name="className" id="className" value="{{ $schoolClass->className }}"/>
+            <label for="class_name">Nome da Turma:</label>
+            <input type="text" name="class_name" id="class_name" value="{{ $schoolClass->class_name }}"/>
         </div>
         <div>
             <label for="year">Ano Letivo:</label>
@@ -18,8 +18,8 @@
                 <option value="2023">2023</option>
             </select>
         </div>
-            <label for="schoolYear">Série:</label>
-            <select name="schoolYear" id="schoolYear">
+            <label for="school_year">Série:</label>
+            <select name="school_year" id="school_year">
                 <option value="1" selected>1º Ano</option>
                 <option value="2">2º Ano</option>
                 <option value="3">3º Ano</option>

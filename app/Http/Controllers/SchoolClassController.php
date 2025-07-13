@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class SchoolClassController extends Controller
 {
     public function index() {
-        $schoolClasses = SchoolClass::all()->select('id','className','room','year','schoolYear')->toArray();
+        $schoolClasses = SchoolClass::all()->select('id','class_name','room','year','school_year')->toArray();
         return view('schoolClass.index', ['schoolClasses' => $schoolClasses]);
     }
 

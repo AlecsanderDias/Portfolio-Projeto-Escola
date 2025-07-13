@@ -22,9 +22,9 @@ class UpdateSchoolClassRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'className' => 'required|min:3|max:10',
+            'class_name' => 'required|min:3|max:10',
             'year' => 'required|integer|between:2021,2025',
-            'schoolYear' => 'required|integer|between:1,10',
+            'school_year' => 'required|integer|between:1,10',
             'room' => 'required|integer|between:10,99'
         ];
     }
@@ -35,7 +35,7 @@ class UpdateSchoolClassRequest extends FormRequest
     public function messages():array
     {
         return [
-            'className' => [
+            'class_name' => [
                 'required' => 'O campo Nome da Turma é obrigatório',
                 'min' => 'O campo Nome da Turma precisa ter no mínimo :min caracteres',
                 'max' => 'O campo Nome da Turma precisa ter no máximo :max caracteres',
@@ -44,7 +44,7 @@ class UpdateSchoolClassRequest extends FormRequest
                 'required' => 'O campo Ano Letivo é obrigatório',
                 'between' => 'O campo Ano Letivo deve estar entre :min e :max',
             ],
-            'schoolYear' => [
+            'school_year' => [
                 'required' => 'O campo Série é obrigatório',
                 'between' => 'O campo Série deve estar entre as opções',
             ],
