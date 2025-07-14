@@ -58,7 +58,7 @@ class UserInformationController extends Controller
             'user_type' => $request->user_type,
             'information_id' => $info->id,
         ]);
-        return redirect()->route('user.index')->with('messge', "O número de Registro é ($registration) e a senha ($pass)");
+        return redirect()->route('users.index')->with('messge', "O número de Registro é ($registration) e a senha ($pass)");
     }
 
     /**
@@ -91,7 +91,7 @@ class UserInformationController extends Controller
         $updateInfo = new Information($request->all());
         User::find($user->id)->update($updateUser->getAttributes());
         Information::find($user->information_id)->update($updateInfo->getAttributes());
-        return redirect()->route('user.index');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -102,6 +102,6 @@ class UserInformationController extends Controller
         $user = User::find($id);
         Information::find($user->information_id)->delete();
         $user->delete();
-        return redirect()->route('user.index');
+        return redirect()->route('users.index');
     }
 }

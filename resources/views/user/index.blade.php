@@ -11,10 +11,10 @@
                     @foreach ($person as $item)
                         {{ $item }}
                     @endforeach
-                    <a href="{{ route('user.edit', $person['id']) }}">
+                    <a href="{{ route('users.edit', $person['id']) }}">
                         <button>Editar</button>
                     </a>
-                    <form action="{{ route('user.destroy', $person['id']) }}" method="POST">
+                    <form action="{{ route('users.destroy', $person['id']) }}" method="POST">
                         @method('DELETE')
                         @csrf
                         <button type="submit">Deletar</button>
@@ -28,7 +28,7 @@
     <a href="{{ route('home') }}">
         <button>Dashboard</button>
     </a>
-    <a href="{{ route('user.create') }}">
+    <a href="{{ route('users.create') }}">
         <button>Criar Usuário</button>
     </a>
 @endsection

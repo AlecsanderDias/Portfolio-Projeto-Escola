@@ -37,4 +37,22 @@ class Subject extends Model
     public function lessons():HasMany {
         return $this->hasMany(Lesson::class);
     }
+
+    public function getAllSubjects() {
+        return $this->all();
+    }
+
+    public function getAllSubjectsWithTeacherArray(array $columns) {
+        if(empty($columns)) $columns = [
+                'subjects.id','subjects.name AS subject_name' ,'subjects.subject_hours','subjects.teacher_id',
+                'informations.name AS teacher_name', 'informations.surname', 'users.registration'
+        ];
+        return Subject::join('users','subjects.teacher_id','=','users.id')
+            ->join('informations','informations.id','=','users.information_id')            
+            ->select($columns)->get()->toArray();
+    }
+
+    public function getAllSubjectNamesArray() {
+        return $this->all(['name'])->toArray();
+    }
 }

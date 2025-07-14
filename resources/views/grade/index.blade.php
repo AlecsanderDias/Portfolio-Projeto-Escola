@@ -1,20 +1,20 @@
 @extends('layout')
 
-@section('title', 'Turmas')
+@section('title','Notas')
 
 @section('content')
-    <h2>Turmas</h2>
-    @if(!empty($schoolClasses))
+    <h2>Notas</h2>
+    @if(!empty($grades))
         <ul>
-            @foreach ($schoolClasses as $classes)
+            @foreach ($grades as $items)
                 <li>
-                    @foreach ($classes as $item)
+                    @foreach ($items as $item)
                         {{ $item }}
                     @endforeach
-                    <a href="{{ route('schoolClasses.edit', $classes['id']) }}">
+                    <a href="{{ route('grades.edit', $items['id']) }}">
                         <button>Editar</button>
                     </a>
-                    <form action="{{ route('schoolClasses.destroy', $classes['id']) }}" method="POST">
+                    <form action="{{ route('grades.destroy', $items['id']) }}" method="POST">
                         @method('DELETE')
                         @csrf
                         <button type="submit">Deletar</button>
@@ -23,10 +23,10 @@
             @endforeach
         </ul>
     @else
-        <p>Não há turmas no sistema!</p>
+        <p>Não há notas no sistema!</p>
     @endif
-    <a href="{{ route('schoolClasses.create') }}">
-        <button>Criar Turma</button>
+    <a href="{{ route('grades.create') }}">
+        <button>Gerar Notas</button>
     </a>
     <a href="{{ route('home') }}">
         <button>Dashboard</button>

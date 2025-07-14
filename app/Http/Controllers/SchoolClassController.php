@@ -20,7 +20,7 @@ class SchoolClassController extends Controller
 
     public function store(CreateSchoolClassRequest $request) {
         SchoolClass::create($request->all());
-        return redirect()->route('schoolClass.index')->with('message', ['Nova turma adicionada com sucesso!']);
+        return redirect()->route('schoolClasses.index')->with('message', ['Nova turma adicionada com sucesso!']);
     }
 
     public function edit(string $id) {
@@ -31,12 +31,12 @@ class SchoolClassController extends Controller
     public function update(UpdateSchoolClassRequest $request, string $id) {
         $schoolClass = new SchoolClass($request->all());
         SchoolClass::find($id)->update($schoolClass->getAttributes());
-        return redirect()->route('schoolClass.index')->with('message', ["Turma $schoolClass->name com id => $id atualizada com sucesso!"]);
+        return redirect()->route('schoolClasses.index')->with('message', ["Turma $schoolClass->name com id => $id atualizada com sucesso!"]);
     }
 
     public function destroy(string $id) {
         $schoolClass = SchoolClass::find($id);
         $schoolClass->delete();
-        return redirect()->route('schoolClass.index')->with('message', ["Turma $schoolClass->name com id => $id foi deletado com sucesso!"]);
+        return redirect()->route('schoolClasses.index')->with('message', ["Turma $schoolClass->name com id => $id foi deletado com sucesso!"]);
     }
 }

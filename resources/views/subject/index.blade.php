@@ -3,7 +3,7 @@
 @section('title', 'Disciplinas')
 
 @section('content')
-     <h2>Disciplinas</h2>
+    <h2>Disciplinas</h2>
     @if(!empty($subjects))
         <ul>
             @foreach ($subjects as $items)
@@ -11,10 +11,10 @@
                     @foreach ($items as $item)
                         {{ $item }}
                     @endforeach
-                    <a href="{{ route('subject.edit', $items['id']) }}">
+                    <a href="{{ route('subjects.edit', $items['id']) }}">
                         <button>Editar</button>
                     </a>
-                    <form action="{{ route('subject.destroy', $items['id']) }}" method="POST">
+                    <form action="{{ route('subjects.destroy', $items['id']) }}" method="POST">
                         @method('DELETE')
                         @csrf
                         <button type="submit">Deletar</button>
@@ -25,7 +25,7 @@
     @else
         <p>Não há disciplinas no sistema!</p>
     @endif
-    <a href="{{ route('subject.create') }}">
+    <a href="{{ route('subjects.create') }}">
         <button>Criar Disciplina</button>
     </a>
     <a href="{{ route('home') }}">

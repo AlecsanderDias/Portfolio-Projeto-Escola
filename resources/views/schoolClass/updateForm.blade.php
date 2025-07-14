@@ -3,7 +3,7 @@
 @section('title','Atualizar Turma')
 
 @section('content')
-    <form action="{{ route('schoolClass.update', $schoolClass->id) }}" method="POST">
+    <form action="{{ route('schoolClasses.update', $schoolClass->id) }}" method="POST">
         @method('PUT')
         @csrf
         <div>

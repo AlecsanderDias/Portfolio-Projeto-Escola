@@ -55,8 +55,8 @@ class User extends Authenticatable
         return $this->hasMany(Grade::class, 'student_id');
     }
 
-    public function subjects():HasMany {
-        return $this->hasMany(Subject::class, 'teacher_id');
+    public function subjects():HasOne {
+        return $this->hasOne(Subject::class, 'teacher_id');
     }
 
     public function attendances():HasMany {

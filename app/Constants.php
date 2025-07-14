@@ -7,9 +7,11 @@ class Constants {
         20, 40, 60, 80
     ];
 
-    public function show_subject_hours() {
-        return self::SUBJECT_HOURS;
-    }
+    const SCHOOL_YEARS = [
+        1 => "1º Ano",
+        2 => "2º Ano",
+        3 => "3º Ano"
+    ];
 }
 
 ?>
