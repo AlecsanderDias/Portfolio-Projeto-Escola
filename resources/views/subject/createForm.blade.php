@@ -3,7 +3,7 @@
 @section('title', 'Criar Disciplina')
 
 @section('content')
-    <form action="{{ route('subject.store') }}" method="POST">
+    <form action="{{ route('subjects.store') }}" method="POST">
         @csrf
         <div>
             <label for="name">Nome da Disciplina:</label>

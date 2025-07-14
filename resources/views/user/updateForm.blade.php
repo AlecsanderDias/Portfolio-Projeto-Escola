@@ -3,7 +3,7 @@
 @section('title', 'Atualizar Usuário')
 
 @section('content')
-    <form action="{{ route('user.update', $data['id']) }}" method="POST" class="">
+    <form action="{{ route('users.update', $data['id']) }}" method="POST" class="">
         @method('PUT')
         @csrf
         <div>

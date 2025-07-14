@@ -3,7 +3,7 @@
 @section('title','Criar Turma')
 
 @section('content')
-    <form action="{{ route('schoolClass.store') }}" method="POST">
+    <form action="{{ route('schoolClasses.store') }}" method="POST">
         @csrf
         <div>
             <label for="class_name">Nome da Turma:</label>

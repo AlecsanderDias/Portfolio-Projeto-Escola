@@ -15,12 +15,14 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subjects = Subject::join('users','subjects.teacher_id','=','users.id')
-            ->join('informations','informations.id','=','users.information_id')
-            ->select([
-                'subjects.id','subjects.name AS subject_name' ,'subjects.subject_hours','subjects.teacher_id',
-                'informations.name AS teacher_name', 'informations.surname', 'users.registration'
-                ])->get()->toArray();
+        // $subjects = Subject::join('users','subjects.teacher_id','=','users.id')
+        //     ->join('informations','informations.id','=','users.information_id')            
+        //     ->select([
+        //         'subjects.id','subjects.name AS subject_name' ,'subjects.subject_hours','subjects.teacher_id',
+        //         'informations.name AS teacher_name', 'informations.surname', 'users.registration'
+        //         ])->get()->toArray();
+        $subjects = Subject::with('users')->get();
+        dd($subjects);
         return view('subject.index', ['subjects' => $subjects]);
     }
 
@@ -40,7 +42,7 @@ class SubjectController extends Controller
     {
         // dd($request->all());
         $subject = Subject::create($request->all());
-        return redirect()->route('subject.index')->with('message',["Nova disciplina $subject->name criada com sucesso!"]);
+        return redirect()->route('subjects.index')->with('message',["Nova disciplina $subject->name criada com sucesso!"]);
     }
 
     /**
@@ -68,7 +70,7 @@ class SubjectController extends Controller
     {
         $subject = new Subject($request->all());
         Subject::find($id)->update($subject->getAttributes());
-        return redirect()->route('subject.index')->with('message', ["A Disciplina $subject->name com id => $id foi alterada com sucesso!"]);
+        return redirect()->route('subjects.index')->with('message', ["A Disciplina $subject->name com id => $id foi alterada com sucesso!"]);
     }
 
     /**
@@ -78,6 +80,6 @@ class SubjectController extends Controller
     {
         $subject = Subject::find($id);
         $subject->delete();
-        return redirect()->route('subject.index')->with('message', ["A Disciplina $subject->name com id => $id foi deletada com sucesso!"]);
+        return redirect()->route('subjects.index')->with('message', ["A Disciplina $subject->name com id => $id foi deletada com sucesso!"]);
     }
 }
