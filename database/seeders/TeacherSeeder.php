@@ -2,20 +2,21 @@
 
 namespace Database\Seeders;
 
-use App\Models\Information;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class UserInformationSeeder extends Seeder
+class TeacherSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        User::factory()
-            ->has(Information::factory()->count(1))
+        Teacher::factory()
+            ->count(env('TEACHER_SEEDER',5))
+            ->has(User::factory()->count(1))
             ->create();
     }
 }
