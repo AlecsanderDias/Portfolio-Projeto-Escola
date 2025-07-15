@@ -16,7 +16,6 @@ return new class extends Migration
             // $table->timestamp('email_verified_at')->nullable();
             $table->integer('registration');
             $table->string('password');
-            $table->string('user_type');
             $table->foreignId('information_id')->nullable()->index();
             $table->rememberToken();
             $table->timestamps();

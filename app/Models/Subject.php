@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -26,12 +28,16 @@ class Subject extends Model
         'teacher_id' => null
     ];
 
-    public function grades():HasMany {
-        return $this->hasMany(Grade::class, 'student_id');
+    public function teacher():BelongsTo {
+        return $this->belongsTo(Teacher::class);
     }
 
-    public function users():HasMany {
-        return $this->hasMany(User::class);
+    public function students():BelongsToMany {
+        return $this->belongsToMany(Student::class);
+    }
+
+    public function grades():HasMany {
+        return $this->hasMany(Grade::class, 'student_id');
     }
 
     public function lessons():HasMany {

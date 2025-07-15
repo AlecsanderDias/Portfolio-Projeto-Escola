@@ -24,7 +24,6 @@ class User extends Authenticatable
     protected $fillable = [
         'registration',
         'password',
-        'user_type',
         'information_id'
     ];
 
@@ -51,16 +50,16 @@ class User extends Authenticatable
         ];
     }
 
-    public function grades():HasMany {
-        return $this->hasMany(Grade::class, 'student_id');
+    public function worker():HasOne {
+        return $this->hasOne(Worker::class, 'user_id');
     }
 
-    public function subjects():HasOne {
-        return $this->hasOne(Subject::class, 'teacher_id');
+    public function student():HasOne {
+        return $this->hasOne(Student::class, 'user_id');
     }
 
-    public function attendances():HasMany {
-        return $this->hasMany(Attendance::class, 'student_id');
+    public function teacher():HasOne {
+        return $this->hasOne(Teacher::class, 'user_id');
     }
 
     public function information():BelongsTo {

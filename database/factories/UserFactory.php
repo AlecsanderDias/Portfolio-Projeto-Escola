@@ -2,10 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Constants;
 use App\Models\Information;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -24,12 +24,11 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $type = ['student', 'teacher', 'worker', 'administrator'];
+        
         $res = rand(0,3);
         return [
-            'registration' => generateRegistration($type[$res]),
+            'registration' => generateRegistration(Constants::USER_TYPES[$res]),
             'password' => static::$password ??= Hash::make('password'),
-            'user_type' => $type[$res],
             'information_id' => Information::factory(),
         ];
     }
