@@ -19,12 +19,10 @@ class UserInformationController extends Controller
 
         $data = User::join('informations','users.information_id','=','informations.id')
             ->select([
-                'users.registration','users.user_type',
+                'users.registration','informations.id',
                 'informations.name','informations.surname',
                 'informations.email','informations.birth_date',
                 'informations.gender','informations.cpf',
-                'informations.school_year','informations.schoolclass_id',
-                'informations.id'
                 ])->get()->toArray();
         return view('user.index', ['data' => $data]);
     }

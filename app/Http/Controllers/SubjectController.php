@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Constants;
 use App\Http\Requests\CreateSubjectRequest;
 use App\Models\Subject;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -21,8 +22,7 @@ class SubjectController extends Controller
         //         'subjects.id','subjects.name AS subject_name' ,'subjects.subject_hours','subjects.teacher_id',
         //         'informations.name AS teacher_name', 'informations.surname', 'users.registration'
         //         ])->get()->toArray();
-        $subjects = Subject::with('users')->get();
-        dd($subjects);
+        $subjects = Subject::all()->select('id','name','subject_hours','teacher_id')->toArray();
         return view('subject.index', ['subjects' => $subjects]);
     }
 
