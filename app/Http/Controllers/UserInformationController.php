@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants;
 use App\Http\Requests\CreateUserInformationRequest;
 use App\Http\Requests\UpdateUserInformationRequest;
 use App\Models\Information;
+use App\Models\SchoolClass;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
+use stdClass;
 
 class UserInformationController extends Controller
 {
@@ -30,16 +33,24 @@ class UserInformationController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('user.createForm');
+        $userType = $request->userType;
+        // dd($request, $request->userType);
+        $data = [];
+        if($userType === 'student') {
+            $data['schoolClasses'] = SchoolClass::all()->select(['id','class_name']);
+            $data['schoolYears'] = Constants::SCHOOL_YEARS;
+        }
+        // dd($data);
+        return view('user.createForm', ['userType' => $userType, 'data' => $data]);
     }
-
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateUserInformationRequest $request)
+    public function store(CreateUserInformationRequest $request, string $userType)
     {
+        dd($userType);
         $pass = generatePassword(7);
         $registration = generateRegistration($request->user_type);
         $info = Information::create([
