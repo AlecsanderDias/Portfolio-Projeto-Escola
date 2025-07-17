@@ -12,7 +12,8 @@ class Worker extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'role'
+        'role',
+        'user_id'
     ];
 
     protected $attributes = [

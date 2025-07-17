@@ -28,7 +28,13 @@
     <a href="{{ route('home') }}">
         <button>Dashboard</button>
     </a>
-    <a href="{{ route('users.create') }}">
-        <button>Criar Usuário</button>
+    <a href="{{ route('users.create')->with('userType', 'student') }}">
+        <button>Criar Estudante</button>
+    </a>
+    <a href="{{ route('users.create')->with('userType', 'teacher') }}">
+        <button>Criar Professor</button>
+    </a>
+    <a href="{{ route('users.create')->with('userType', 'worker') }}">
+        <button>Criar Funcionário</button>
     </a>
 @endsection
