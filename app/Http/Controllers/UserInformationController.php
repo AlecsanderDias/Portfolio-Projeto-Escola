@@ -7,7 +7,10 @@ use App\Http\Requests\CreateUserInformationRequest;
 use App\Http\Requests\UpdateUserInformationRequest;
 use App\Models\Information;
 use App\Models\SchoolClass;
+use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\User;
+use App\Models\Worker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use stdClass;
@@ -36,23 +39,20 @@ class UserInformationController extends Controller
     public function create(Request $request)
     {
         $userType = $request->userType;
-        // dd($request, $request->userType);
-        $data = [];
+        $data = new stdClass();
         if($userType === 'student') {
-            $data['schoolClasses'] = SchoolClass::all()->select(['id','class_name']);
-            $data['schoolYears'] = Constants::SCHOOL_YEARS;
+            $data->schoolClasses = SchoolClass::all()->select('id','class_name');
+            $data->schoolYears = Constants::SCHOOL_YEARS;
         }
-        // dd($data);
         return view('user.createForm', ['userType' => $userType, 'data' => $data]);
     }
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateUserInformationRequest $request, string $userType)
+    public function store(CreateUserInformationRequest $request)
     {
-        dd($userType);
         $pass = generatePassword(7);
-        $registration = generateRegistration($request->user_type);
+        $registration = generateRegistration($request->userType);
         $info = Information::create([
             'name' => $request->name,
             'surname' => $request->surname,
@@ -64,10 +64,26 @@ class UserInformationController extends Controller
         $user = User::create([
             'registration' => $registration,
             'password' => $pass,
-            'user_type' => $request->user_type,
             'information_id' => $info->id,
         ]);
-        return redirect()->route('users.index')->with('messge', "O número de Registro é ($registration) e a senha ($pass)");
+        if($request->userType === "student") {
+            Student::create([
+                'user_id' => $user->id,
+                'school_year' => $request->school_year,
+                'school_class_id' => $request->school_class_id,
+            ]);
+        } elseif($request->userType === "teacher") {
+            Teacher::create([
+                'user_id' => $user->id,
+                'professional_number' => $request->professional_number
+            ]);
+        } else {
+            Worker::create([
+                'user_id' => $user->id,
+                'role' => $request->role
+            ]);
+        }
+        return redirect()->route('users.index')->with('message', ["O número de Registro é ($registration) e a senha ($pass)"]);
     }
 
     /**
@@ -109,8 +125,8 @@ class UserInformationController extends Controller
     public function destroy(string $id)
     {
         $user = User::find($id);
-        Information::find($user->information_id)->delete();
+        $info = Information::find($user->information_id)->delete();
         $user->delete();
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('message', ["O usuário $info->name com matrícula $user->registration foi excluído do sistema!"]);
     }
 }
