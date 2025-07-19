@@ -1,5 +1,7 @@
-<?php 
-    use Illuminate\Support\Facades\Config;
+<?php
+
+use App\Constants;
+use Illuminate\Support\Facades\Config;
     use Illuminate\Support\Str;
 
     if( !function_exists('generatePassword')) {
@@ -12,16 +14,24 @@
         function generateRegistration($type):int {
             switch($type) {
                 case 'student':
-                    return generateStudentId();
+                    return rand(
+                        Config::get('STUDENT_MIN', Constants::DEFAULT_VALUES['student']['min']),
+                        Config::get('STUDENT_MAX', Constants::DEFAULT_VALUES['student']['max']));
                 break;
                 case 'teacher':
-                    return generateTeacherId();
+                    return rand(
+                        Config::get('TEACHER_MIN', Constants::DEFAULT_VALUES['teacher']['min']),
+                        Config::get('TEACHER_MAX', Constants::DEFAULT_VALUES['teacher']['max']));
                 break;
                 case 'worker':
-                    return generateWorkerId();
+                    return rand(
+                        Config::get('WORKER_MIN', Constants::DEFAULT_VALUES['worker']['min']),
+                        Config::get('WORKER_MAX', Constants::DEFAULT_VALUES['worker']['max']));
                 break;
                 case 'administrator':
-                    return generateAdminId();
+                    return rand(
+                        Config::get('ADMIN_MIN', Constants::DEFAULT_VALUES['admin']['min']),
+                        Config::get('ADMIN_MAX', Constants::DEFAULT_VALUES['admin']['max']));
                 break;
                 default:
                     return 0;
@@ -30,36 +40,10 @@
         }
     }
 
-    if( !function_exists('generateStudentId')) {
-        function generateStudentId() {
-            return rand(
-                Config::get('STUDENT_MIN', 100000),
-                Config::get('STUDENT_MAX', 999999));
-        }
-    }
-
-    if( !function_exists('generateTeacherId')) {
-        function generateTeacherId() {
-            return rand(
-                Config::get('TEACHER_MIN', 10000),
-                Config::get('TEACHER_MAX', 99999));
-        }
-    }
-
-    if( !function_exists('generateWorkerId')) {
-        function generateWorkerId() {
-            return rand(
-                Config::get('WORKER_MIN', 1000),
-                Config::get('WORKER_MAX', 9999));
-        }
-    }
-
-    if( !function_exists('generateAdminId')) {
-        function generateAdminId() {
-            return rand(
-                Config::get('ADMIN_MIN', 100),
-                Config::get('ADMIN_MAX', 999));
-        }
+    if(!function_exists('checkUserType')) {
+        function checkUserType($userId) {
+            
+        };
     }
 
 ?>

@@ -6,6 +6,7 @@
     <form action="{{ route('users.update', $data['id']) }}" method="POST" class="">
         @method('PUT')
         @csrf
+         <input hidden type="text" name="user_type" value="{{ $data['user_type'] }}" disabled>
         <div>
             <label for="name">Nome:</label>
             <input type="text" name="name" id="name" value="{{ $data['name'] }}"/>
@@ -36,34 +37,30 @@
         <div>
             <label for="registration">Registration: {{ $data['registration'] }} </label>
         </div>
-        <div>
-            <label for="user_type">Tipo de Usuário:</label>
-            <select name="user_type" id="user_type" value="{{ $data['user_type'] }}">
-                <option value="student" selected>Estudante</option>
-                <option value="teacher">Professor</option>
-                <option value="worker">Funcionário</option>
-                <option value="administrator">Administrador</option>
-            </select>
-        </div>
-        @if($data['user_type'] == 'student')
-        <div>
-            <label for="school_year">Série:</label>
-            <select name="school_year" id="school_year">
-                <option value="{{ null }}"></option>
-                <option value="1">1º Ano</option>
-                <option value="2">2º Ano</option>
-                <option value="3">3º Ano</option>
-            </select>
-        </div>
-        <div>
-            <label for="schoolclass_id">Turma:</label>
-            <select name="schoolclass_id" id="schoolclass_id">
-                <option value="{{ null }}"></option>
-                <option value="101">101</option>
-                <option value="201">201</option>
-                <option value="301">301</option>
-            </select>
-        </div>
+         @if($userType === 'student')
+            <div>
+                <label for="school_year">Série:</label>
+                <select name="school_year" id="school_year">
+                    <option value="{{ null }}" selected></option>
+                    @foreach ($data['school_years'] as $key => $schoolYear)
+                        <option value="{{ $key }}">{{ $schoolYear }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div>
+                <label for="school_class_id">Turma:</label>
+                <select name="school_class_id" id="school_class_id">
+                    <option value="{{ null }}" selected></option>
+                    @foreach ($data['school_classes'] as $key => $schoolClass)
+                        <option value="{{ $schoolClass['id'] }}">{{  $schoolClass['class_name'] }}</option>
+                    @endforeach
+                </select>
+            </div>
+        @elseif($userType === 'teacher')
+            <div>
+                <label for="professional_number">Registro de Professor:</label>
+                <input type="text" name="professional_number" id="professional_number" value="{{ $professional_number }}"/>
+            </div>
         @endif
         <button type="submit">Salvar</button>
     </form>

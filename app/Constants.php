@@ -3,6 +3,25 @@
 namespace App;
 
 class Constants {
+    const DEFAULT_VALUES = [
+        'student' => [
+            'min' => 100000,
+            'max' => 999999
+        ],
+        'teacher' => [
+            'min' => 10000,
+            'max' => 99999
+        ],
+        'worker' => [
+            'min' => 1000,
+            'max' => 99999
+        ],
+        'admin' => [
+            'min' => 100,
+            'max' => 999
+        ],
+    ];
+
     const SUBJECT_HOURS = [20, 40, 60, 80];
 
     const SCHOOL_YEARS = [
