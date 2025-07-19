@@ -52,7 +52,7 @@ class UserInformationController extends Controller
     public function store(CreateUserInformationRequest $request)
     {
         $pass = generatePassword(7);
-        $registration = generateRegistration($request->userType);
+        $registration = generateRegistration($request->user_type);
         $info = Information::create([
             'name' => $request->name,
             'surname' => $request->surname,
@@ -66,13 +66,13 @@ class UserInformationController extends Controller
             'password' => $pass,
             'information_id' => $info->id,
         ]);
-        if($request->userType === "student") {
+        if($request->user_type === "student") {
             Student::create([
                 'user_id' => $user->id,
                 'school_year' => $request->school_year,
                 'school_class_id' => $request->school_class_id,
             ]);
-        } elseif($request->userType === "teacher") {
+        } elseif($request->user_type === "teacher") {
             Teacher::create([
                 'user_id' => $user->id,
                 'professional_number' => $request->professional_number
@@ -80,7 +80,7 @@ class UserInformationController extends Controller
         } else {
             Worker::create([
                 'user_id' => $user->id,
-                'role' => $request->role
+                'role' => $request->user_type
             ]);
         }
         return redirect()->route('users.index')->with('message', ["O número de Registro é ($registration) e a senha ($pass)"]);
@@ -99,11 +99,24 @@ class UserInformationController extends Controller
      */
     public function edit(string $id)
     {
-        $userFields = ['id','registration', 'user_type','information_id'];
-        $informationFields = ['id','name','surname','email','birth_date','gender','cpf','school_year','schoolclass_id'];
-        $info = Information::get($informationFields)->find($id)->toArray();
-        $user = User::where('information_id',$id)->get($userFields)->toArray();
-        $data = [...$info, ...$user[0]];
+
+        $userFields = ['id','registration','information_id'];
+        $informationFields = ['id','name','surname','email','birth_date','gender','cpf'];
+        // $info = Information::get($informationFields)->find($id)->toArray();
+        // $user = User::where('information_id',$id)->get($userFields)->toArray();
+        // $data = [...$info, ...$user[0]];
+        $user = User::select($userFields)->find($id);
+        $userType = checkUserType($user->registration);
+        $info = Information::select($informationFields)->find($user->information_id);
+        $data = [];
+        if($userType === 'student') {
+            $data = Student::select(['school_year', 'school_class_id'])->where('user_id',$id);
+        } elseif($userType === 'teacher') {
+            $data = Teacher::select(['professional_number'])->where('user_id',$id);
+        } else {
+            $data = Worker::select(['role'])->where('user_id',$id);
+        }
+        dd($user, $info, $data);
         return view('user.updateForm', ['data' => $data]);
     }
 

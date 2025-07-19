@@ -5,7 +5,7 @@
 @section('content')
     <form action="{{ route('users.store') }}" method="POST" class="">
         @csrf
-        <input hidden type="text" name="userType" value="{{ $userType }}">
+        <input hidden type="text" name="user_type" value="{{ $userType }}" disabled>
         <div>
             <label for="name">Nome:</label>
             <input type="text" name="name" id="name" value="{{ old('name') }}"/>
@@ -57,14 +57,6 @@
                 <label for="professional_number">Registro de Professor:</label>
                 <input type="text" name="professional_number" id="professional_number" value="{{ old('professional_number') }}"/>
             </div> 
-        @else
-        <div>
-            <label for="role">Tipo de Usuário:</label>
-            <select name="role" id="role" value="{{ old('role') }}">
-                <option value="worker">Funcionário</option>
-                <option value="administrator">Administrador</option>
-            </select>
-        </div>
         @endif
         <button type="submit">Criar</button>
     </form>

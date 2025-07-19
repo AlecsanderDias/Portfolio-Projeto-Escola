@@ -37,4 +37,7 @@
     <a href="{{ route('users.create', ['userType' => 'worker']) }}">
         <button>Criar Funcionário</button>
     </a>
+    <a href="{{ route('users.create', ['userType' => 'administrator']) }}">
+        <button>Criar Funcionário</button>
+    </a>
 @endsection
