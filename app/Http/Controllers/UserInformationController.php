@@ -108,16 +108,19 @@ class UserInformationController extends Controller
         $user = User::select($userFields)->find($id);
         $userType = checkUserType($user->registration);
         $info = Information::select($informationFields)->find($user->information_id);
-        $data = [];
+        $role = [];
         if($userType === 'student') {
-            $data = Student::select(['school_year', 'school_class_id'])->where('user_id',$id);
+            $role = Student::select(['school_year', 'school_class_id'])->where('user_id',$id);
         } elseif($userType === 'teacher') {
-            $data = Teacher::select(['professional_number'])->where('user_id',$id);
+            $role = Teacher::select(['professional_number'])->where('user_id',$id);
         } else {
-            $data = Worker::select(['role'])->where('user_id',$id);
+            $role = Worker::select(['role'])->where('user_id',$id);
         }
-        dd($user, $info, $data);
-        return view('user.updateForm', ['data' => $data]);
+        // dd($user->getAttributes(), $info->getAttributes(), $role->getModel()->getAttributes());
+        // dd($user->toArray(), $info->toArray(), $role->getModel()->toArray());
+        $data = [...$user->toArray(), ...$info->toArray(), ...$role->getModel()->toArray()];
+        dd($data, $userType);
+        return view('user.updateForm', ['data' => $data, 'userType' => $userType]);
     }
 
     /**

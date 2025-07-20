@@ -6,7 +6,6 @@
     <form action="{{ route('users.update', $data['id']) }}" method="POST" class="">
         @method('PUT')
         @csrf
-         <input hidden type="text" name="user_type" value="{{ $data['user_type'] }}" disabled>
         <div>
             <label for="name">Nome:</label>
             <input type="text" name="name" id="name" value="{{ $data['name'] }}"/>
