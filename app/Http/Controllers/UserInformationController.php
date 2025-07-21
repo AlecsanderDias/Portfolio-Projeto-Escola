@@ -119,7 +119,6 @@ class UserInformationController extends Controller
         // dd($user->getAttributes(), $info->getAttributes(), $role->getModel()->getAttributes());
         // dd($user->toArray(), $info->toArray(), $role->getModel()->toArray());
         $data = [...$user->toArray(), ...$info->toArray(), ...$role->getModel()->toArray()];
-        dd($data, $userType);
         return view('user.updateForm', ['data' => $data, 'userType' => $userType]);
     }
 
