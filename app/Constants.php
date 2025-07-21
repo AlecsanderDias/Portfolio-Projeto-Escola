@@ -14,7 +14,7 @@ class Constants {
         ],
         'worker' => [
             'min' => 1000,
-            'max' => 99999
+            'max' => 9999
         ],
         'admin' => [
             'min' => 100,

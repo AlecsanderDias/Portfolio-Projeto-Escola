@@ -41,11 +41,12 @@ use Illuminate\Support\Facades\Config;
     }
 
     if(!function_exists('checkUserType')) {
-        function checkUserType($userId) {
-            if($userId >= Config::get('ADMIN_MIN', Constants::DEFAULT_VALUES['admin']['min']) and $userId <= Config::get('ADMIN_MIN', Constants::DEFAULT_VALUES['admin']['max'])) return 'administrator';
-            if($userId >= Config::get('WORKER_MIN', Constants::DEFAULT_VALUES['worker']['min']) and $userId <= Config::get('WORKER_MIN', Constants::DEFAULT_VALUES['worker']['max'])) return 'worker';
-            if($userId >= Config::get('TEACHER_MIN', Constants::DEFAULT_VALUES['teacher']['min']) and $userId <= Config::get('TEACHER_MIN', Constants::DEFAULT_VALUES['teacher']['max'])) return 'teacher';
-            if($userId >= Config::get('STUDENT_MIN', Constants::DEFAULT_VALUES['student']['min']) and $userId <= Config::get('STUDENT_MIN', Constants::DEFAULT_VALUES['student']['max'])) return 'student';
+        function checkUserType($registration) {
+            if($registration >= Config::get('ADMIN_MIN', Constants::DEFAULT_VALUES['admin']['min']) and $registration <= Config::get('ADMIN_MAX', Constants::DEFAULT_VALUES['admin']['max'])) return 'administrator';
+            if($registration >= Config::get('WORKER_MIN', Constants::DEFAULT_VALUES['worker']['min']) and $registration <= Config::get('WORKER_MAX', Constants::DEFAULT_VALUES['worker']['max'])) return 'worker';
+            if($registration >= Config::get('TEACHER_MIN', Constants::DEFAULT_VALUES['teacher']['min']) and $registration <= Config::get('TEACHER_MAX', Constants::DEFAULT_VALUES['teacher']['max'])) return 'teacher';
+            if($registration >= Config::get('STUDENT_MIN', Constants::DEFAULT_VALUES['student']['min']) and $registration <= Config::get('STUDENT_MAX', Constants::DEFAULT_VALUES['student']['max'])) return 'student';
+            return null;
         };
     }
 

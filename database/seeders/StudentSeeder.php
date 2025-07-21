@@ -16,7 +16,7 @@ class StudentSeeder extends Seeder
     {
         Student::factory()
             ->count(env('STUDENT_SEEDER',10))
-            ->has(User::factory()->count(1))
+            ->has(User::factory())
             ->create();
     }
 }

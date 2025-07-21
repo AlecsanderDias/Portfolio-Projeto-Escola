@@ -18,10 +18,10 @@ class WorkerFactory extends Factory
      */
     public function definition(): array
     {
-        $rand = rand(2,3);
+        $role = Constants::USER_TYPES[rand(2,3)];
         return [
-            'role' => Constants::USER_TYPES[$rand],
-            'user_id' => User::factory(),
+            'role' => $role,
+            'user_id' => User::factory()->make(['registration' => generateRegistration('worker')]),
         ];
     }
 }

@@ -16,7 +16,7 @@ class WorkerSeeder extends Seeder
     {
         Worker::factory()
             ->count(env('WORKER_SEEDER',10))
-            ->has(User::factory()->count(1))
+            ->has(User::factory())
             ->create();
     }
 }

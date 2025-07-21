@@ -38,6 +38,6 @@
         <button>Criar Funcionário</button>
     </a>
     <a href="{{ route('users.create', ['userType' => 'administrator']) }}">
-        <button>Criar Funcionário</button>
+        <button>Criar Adminsitrador</button>
     </a>
 @endsection

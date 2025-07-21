@@ -24,7 +24,6 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        
         $res = rand(0,3);
         return [
             'registration' => generateRegistration(Constants::USER_TYPES[$res]),
