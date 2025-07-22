@@ -28,16 +28,16 @@
     <a href="{{ route('home') }}">
         <button>Dashboard</button>
     </a>
-    <a href="{{ route('users.create', ['userType' => 'student']) }}">
+    <a href="{{ route('users.create', ['user_type' => 'student']) }}">
         <button>Criar Estudante</button>
     </a>
-    <a href="{{ route('users.create', ['userType' => 'teacher']) }}">
+    <a href="{{ route('users.create', ['user_type' => 'teacher']) }}">
         <button>Criar Professor</button>
     </a>
-    <a href="{{ route('users.create', ['userType' => 'worker']) }}">
-        <button>Criar Funcionário</button>
+    <a href="{{ route('users.create', ['user_type' => 'worker']) }}">
+        <button>Criar Funcionário</button> 
     </a>
-    <a href="{{ route('users.create', ['userType' => 'administrator']) }}">
+    <a href="{{ route('users.create', ['user_type' => 'administrator']) }}">
         <button>Criar Adminsitrador</button>
     </a>
 @endsection

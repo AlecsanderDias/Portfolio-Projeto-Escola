@@ -38,7 +38,7 @@ class UserInformationController extends Controller
      */
     public function create(Request $request)
     {
-        $userType = $request->userType;
+        $userType = $request->user_type;
         $data = new stdClass();
         if($userType === 'student') {
             $data->schoolClasses = SchoolClass::all()->select('id','class_name');
@@ -82,7 +82,7 @@ class UserInformationController extends Controller
                 'user_id' => $user->id,
                 'role' => $request->user_type
             ]);
-        }
+        } 
         return redirect()->route('users.index')->with('message', ["O número de Registro é ($registration) e a senha ($pass)"]);
     }
 
@@ -101,24 +101,28 @@ class UserInformationController extends Controller
     {
 
         $userFields = ['id','registration','information_id'];
-        $informationFields = ['id','name','surname','email','birth_date','gender','cpf'];
-        // $info = Information::get($informationFields)->find($id)->toArray();
-        // $user = User::where('information_id',$id)->get($userFields)->toArray();
-        // $data = [...$info, ...$user[0]];
+        $informationFields = ['name','surname','email','birth_date','gender','cpf'];
         $user = User::select($userFields)->find($id);
         $userType = checkUserType($user->registration);
         $info = Information::select($informationFields)->find($user->information_id);
-        $role = [];
+        $schoolClasses = SchoolClass::select(['id', 'class_name', 'school_year', 'room'])->where('year',2025)->get();
+        $role = new stdClass();
         if($userType === 'student') {
-            $role = Student::select(['school_year', 'school_class_id'])->where('user_id',$id);
+            $role = Student::select(['school_year', 'school_class_id'])->where('user_id',$id)->get();
         } elseif($userType === 'teacher') {
-            $role = Teacher::select(['professional_number'])->where('user_id',$id);
+            $role = Teacher::select(['professional_number'])->where('user_id',$id)->get();
         } else {
-            $role = Worker::select(['role'])->where('user_id',$id);
+            $role = Worker::select(['role'])->where('user_id',$id)->get();
         }
-        // dd($user->getAttributes(), $info->getAttributes(), $role->getModel()->getAttributes());
-        // dd($user->toArray(), $info->toArray(), $role->getModel()->toArray());
-        $data = [...$user->toArray(), ...$info->toArray(), ...$role->getModel()->toArray()];
+        // dd($role, $id, $userType, $userType === 'student');
+        $data = [
+            ...$user->toArray(), 
+            ...$info->toArray(), 
+            ...$role[0]->toArray(), 
+            'school_classes' => $schoolClasses->toArray(), 
+            'school_years' => Constants::SCHOOL_YEARS, 
+            'school_rooms' => Constants::ROOM_NAMES];
+        // dd("Edit", $data);
         return view('user.updateForm', ['data' => $data, 'userType' => $userType]);
     }
 
@@ -127,11 +131,26 @@ class UserInformationController extends Controller
      */
     public function update(UpdateUserInformationRequest $request, User $user)
     {
+        $userType = checkUserType($user->registration);
+        // dd($user, $userType);
         $updateUser = new User($request->all());
         $updateInfo = new Information($request->all());
         User::find($user->id)->update($updateUser->getAttributes());
         Information::find($user->information_id)->update($updateInfo->getAttributes());
-        return redirect()->route('users.index');
+        if($userType === 'student') {
+            $studentId = Student::select(['id'])->where('user_id',$user->id);
+            $updateStudent = new Student($request->all());
+            Student::find($studentId)->update($updateStudent->getAttributes());
+        } elseif($userType === 'teacher') {
+            $teacherId = Teacher::select(['id'])->where('user_id',$user->id);
+            $updateTeacher = new Teacher($request->all());
+            Teacher::find($teacherId)->update($updateTeacher->getAttributes());
+        } else {
+            $workerId = Worker::select(['id'])->where('user_id',$user->id);
+            $updateWorker = new Worker($request->all());
+            Worker::find($workerId)->update($updateWorker->getAttributes());
+        }
+        return redirect()->route('users.index')->with('message', ["O usuário com registro $user->registration do tipo $userType foi atualizado com sucesso!"]);
     }
 
     /**

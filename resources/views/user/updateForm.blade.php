@@ -7,6 +7,9 @@
         @method('PUT')
         @csrf
         <div>
+            <label for="registration">Matrícula: {{ $data['registration'] }} </label>
+        </div>
+        <div>
             <label for="name">Nome:</label>
             <input type="text" name="name" id="name" value="{{ $data['name'] }}"/>
         </div>
@@ -33,16 +36,13 @@
             <label for="cpf">CPF:</label>
             <input type="text" name="cpf" id="cpf" value="{{ $data['cpf'] }}"/>
         </div>
-        <div>
-            <label for="registration">Registration: {{ $data['registration'] }} </label>
-        </div>
-         @if($userType === 'student')
+        @if($userType === 'student')
             <div>
                 <label for="school_year">Série:</label>
                 <select name="school_year" id="school_year">
                     <option value="{{ null }}" selected></option>
                     @foreach ($data['school_years'] as $key => $schoolYear)
-                        <option value="{{ $key }}">{{ $schoolYear }}</option>
+                        <option value="{{ $key }}" @if($data['school_year'] === $key) selected @endif>{{ $schoolYear }}</option>
                     @endforeach
                 </select>
             </div>
@@ -51,14 +51,14 @@
                 <select name="school_class_id" id="school_class_id">
                     <option value="{{ null }}" selected></option>
                     @foreach ($data['school_classes'] as $key => $schoolClass)
-                        <option value="{{ $schoolClass['id'] }}">{{  $schoolClass['class_name'] }}</option>
+                        <option value="{{ $schoolClass['id'] }}" @if((int)$data['school_class_id'] === $schoolClass['id']) selected @endif>{{$schoolClass['id'] }} - {{ $data['school_rooms'][$schoolClass['id']] }} - {{  $schoolClass['class_name'] }}</option>
                     @endforeach
                 </select>
             </div>
         @elseif($userType === 'teacher')
             <div>
                 <label for="professional_number">Registro de Professor:</label>
-                <input type="text" name="professional_number" id="professional_number" value="{{ $professional_number }}"/>
+                <input type="text" name="professional_number" id="professional_number" value="{{ $data['professional_number'] }}"/>
             </div>
         @endif
         <button type="submit">Salvar</button>

@@ -21,7 +21,7 @@ class WorkerFactory extends Factory
         $role = Constants::USER_TYPES[rand(2,3)];
         return [
             'role' => $role,
-            'user_id' => User::factory()->make(['registration' => generateRegistration('worker')]),
+            'user_id' => User::factory()->state(['registration' => generateRegistration($role)]),
         ];
     }
 }

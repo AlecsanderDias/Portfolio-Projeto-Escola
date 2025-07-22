@@ -15,7 +15,7 @@ class WorkerSeeder extends Seeder
     public function run(): void
     {
         Worker::factory()
-            ->count(env('WORKER_SEEDER',10))
+            ->count(env('WORKER_SEEDER',7))
             ->has(User::factory())
             ->create();
     }

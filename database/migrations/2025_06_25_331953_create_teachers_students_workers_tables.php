@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable();
-            $table->integer('professional_number');
+            $table->integer('professional_number')->unique();
             $table->timestamps();
             $table->softDeletes();
         });

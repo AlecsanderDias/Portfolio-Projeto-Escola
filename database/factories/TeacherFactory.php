@@ -19,7 +19,7 @@ class TeacherFactory extends Factory
     {
         return [
             'professional_number' => fake()->randomNumber(5,true),
-            'user_id' => User::factory()->make(['registration' => generateRegistration('teacher')]),
+            'user_id' => User::factory()->state(['registration' => generateRegistration('teacher')]),
         ];
     }
 }
