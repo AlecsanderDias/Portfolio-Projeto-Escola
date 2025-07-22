@@ -22,14 +22,17 @@ class UpdateUserInformationRequest extends FormRequest
      */
     public function rules(): array
     {
+        // dd($this, $this->user);
         return [
             'name' => 'required|min:3|max:20',
             'surname' => 'required|min:3|max:40',
             'email' => [
-                'required', 'email', 'min:7', 'max:30', Rule::unique('informations')->ignore($this->user->information_id),
+                'required', 'email', 'min:7', 'max:30',
+                Rule::unique('informations')->ignore($this->user->information_id),
             ],
             'cpf' => [
-                'required', 'digits:11', Rule::unique('informations')->ignore($this->user->information_id),
+                'required', 'digits:11', 
+                Rule::unique('informations')->ignore($this->user->information_id),
             ],
         ];
     }

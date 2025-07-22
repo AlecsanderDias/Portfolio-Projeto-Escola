@@ -3,9 +3,8 @@
 @section('title', 'Criar Usuário')
 
 @section('content')
-    <form action="{{ route('users.store') }}" method="POST" class="">
+    <form action="{{ route('users.store', ['user_type' => $userType]) }}" method="POST" class="">
         @csrf
-        <input hidden type="text" name="user_type" value="{{ $userType }}" disabled>
         <div>
             <label for="name">Nome:</label>
             <input type="text" name="name" id="name" value="{{ old('name') }}"/>

@@ -20,10 +20,11 @@ class SubjectFactory extends Factory
     public function definition(): array
     {
         $rd = rand(0, sizeof(Constants::SUBJECT_HOURS)-1);
+        $maxId = max(Teacher::all('id')->toArray());
         return [
             'name' => fake()->word(),
             'subject_hours' => Constants::SUBJECT_HOURS[$rd],
-            'teacher_id' => rand(1, (int)max(Teacher::all('id')->toArray())),
+            'teacher_id' => rand(1, $maxId['id']),
         ];
     }
 }

@@ -21,7 +21,7 @@ class StudentFactory extends Factory
         $rand = rand(1, count(Constants::SCHOOL_YEARS));
         return [
             'school_year' => $rand,
-            'user_id' => User::factory()->make(['registration' => generateRegistration('student')]),
+            'user_id' => User::factory()->state(['registration' => generateRegistration('student')]),
         ];
     }
 }
