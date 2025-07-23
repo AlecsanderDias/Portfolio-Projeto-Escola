@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants;
 use App\Http\Requests\CreateSchoolClassRequest;
 use App\Http\Requests\UpdateSchoolClassRequest;
 use App\Models\SchoolClass;
@@ -15,7 +16,10 @@ class SchoolClassController extends Controller
     }
 
     public function create() {
-        return view('schoolClass.createForm');
+        $years = getYearsArray();
+        $schoolYears = Constants::SCHOOL_YEARS;
+        $rooms = Constants::ROOM_NAMES;
+        return view('schoolClass.createForm', ['years' => $years, 'schoolYears' => $schoolYears, 'rooms' => $rooms]);
     }
 
     public function store(CreateSchoolClassRequest $request) {
@@ -25,7 +29,10 @@ class SchoolClassController extends Controller
 
     public function edit(string $id) {
         $schoolClass = SchoolClass::find($id);
-        return view('schoolClass.updateForm', ['schoolClass' => $schoolClass]);
+        $years = getYearsArray();
+        $schoolYears = Constants::SCHOOL_YEARS;
+        $rooms = Constants::ROOM_NAMES;
+        return view('schoolClass.updateForm', ['schoolClass' => $schoolClass, 'years' => $years, 'schoolYears' => $schoolYears, 'rooms' => $rooms]);
     }
 
     public function update(UpdateSchoolClassRequest $request, string $id) {

@@ -16,12 +16,6 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        // $subjects = Subject::join('users','subjects.teacher_id','=','users.id')
-        //     ->join('informations','informations.id','=','users.information_id')            
-        //     ->select([
-        //         'subjects.id','subjects.name AS subject_name' ,'subjects.subject_hours','subjects.teacher_id',
-        //         'informations.name AS teacher_name', 'informations.surname', 'users.registration'
-        //         ])->get()->toArray();
         $subjects = Subject::all()->select('id','name','subject_hours','teacher_id')->toArray();
         return view('subject.index', ['subjects' => $subjects]);
     }
@@ -31,7 +25,9 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        $teachers = User::join('informations','users.information_id','=','informations.id')->select('users.id','users.registration','informations.name','informations.surname')->where('users.user_type','=','teacher')->get();
+        $teachers = Teacher::join('users','users.id','=','teachers.user_id')
+            ->join('informations','informations.id','=','users.information_id')
+            ->select('teachers.id','users.registration','informations.name','informations.surname')->get();
         return view('subject.createForm', ['teachers' => $teachers, 'subjectHours' => Constants::SUBJECT_HOURS]);
     }
 
@@ -40,7 +36,6 @@ class SubjectController extends Controller
      */
     public function store(CreateSubjectRequest $request)
     {
-        // dd($request->all());
         $subject = Subject::create($request->all());
         return redirect()->route('subjects.index')->with('message',["Nova disciplina $subject->name criada com sucesso!"]);
     }
@@ -59,7 +54,9 @@ class SubjectController extends Controller
     public function edit(string $id)
     {
         $subject = Subject::find($id);
-        $teachers = User::join('informations','users.information_id','=','informations.id')->select('users.id','users.registration','informations.name','informations.surname')->where('users.user_type','=','teacher')->get();
+        $teachers = Teacher::join('users','users.id','=','teachers.user_id')
+            ->join('informations','informations.id','=','users.information_id')
+            ->select('teachers.id','users.registration','informations.name','informations.surname')->get();
         return view('subject.updateForm', ['subject' => $subject, 'teachers' => $teachers, 'subjectHours' => Constants::SUBJECT_HOURS]);
     }
 

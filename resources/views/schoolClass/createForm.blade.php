@@ -12,23 +12,23 @@
         <div>
             <label for="year">Ano Letivo:</label>
             <select name="year" id="year">
-                <option value="2021" selected>2021</option>
-                <option value="2022">2022</option>
-                <option value="2023">2023</option>
+            @foreach ($years as $year)
+                <option value="{{ $year }}">{{ $year }}</option>
+            @endforeach
             </select>
         </div>
             <label for="school_year">Série:</label>
             <select name="school_year" id="school_year">
-                <option value="1" selected>1º Ano</option>
-                <option value="2">2º Ano</option>
-                <option value="3">3º Ano</option>
+            @foreach ($schoolYears as $key => $schoolYear)
+                <option value="{{ $key }}">{{ $schoolYear }}</option>
+            @endforeach
             </select>
         <div>
             <label for="room">Sala:</label>
             <select name="room" id="room">
-                <option value="11" selected>11</option>
-                <option value="22">22</option>
-                <option value="33">33</option>
+            @foreach ($rooms as $key => $room)
+                <option value="{{ $key }}">{{ $room }}</option>
+            @endforeach
             </select>
         </div>
         <button type="submit">Criar</button>

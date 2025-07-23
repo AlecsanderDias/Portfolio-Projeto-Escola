@@ -25,7 +25,7 @@ class UpdateSchoolClassRequest extends FormRequest
             'class_name' => 'required|min:3|max:10',
             'year' => 'required|integer|between:2021,2025',
             'school_year' => 'required|integer|between:1,10',
-            'room' => 'required|integer|between:10,99'
+            'room' => 'required|integer|between:0,99'
         ];
     }
 
@@ -50,6 +50,7 @@ class UpdateSchoolClassRequest extends FormRequest
             ],
             'room' => [
                 'required' => 'O campo Sala é obrigatório',
+                'integer' => 'O valor do campo Sala é inválido',
                 'between' => 'O campo Sala deve estar entre as opções',
             ],
         ];

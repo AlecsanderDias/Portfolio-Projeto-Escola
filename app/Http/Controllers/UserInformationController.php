@@ -99,7 +99,6 @@ class UserInformationController extends Controller
      */
     public function edit(string $id)
     {
-
         $userFields = ['id','registration','information_id'];
         $informationFields = ['name','surname','email','birth_date','gender','cpf'];
         $user = User::select($userFields)->find($id);
@@ -114,7 +113,6 @@ class UserInformationController extends Controller
         } else {
             $role = Worker::select(['role'])->where('user_id',$id)->get();
         }
-        // dd($role, $id, $userType, $userType === 'student');
         $data = [
             ...$user->toArray(), 
             ...$info->toArray(), 
@@ -122,7 +120,6 @@ class UserInformationController extends Controller
             'school_classes' => $schoolClasses->toArray(), 
             'school_years' => Constants::SCHOOL_YEARS, 
             'school_rooms' => Constants::ROOM_NAMES];
-        // dd("Edit", $data);
         return view('user.updateForm', ['data' => $data, 'userType' => $userType]);
     }
 
@@ -132,7 +129,6 @@ class UserInformationController extends Controller
     public function update(UpdateUserInformationRequest $request, User $user)
     {
         $userType = checkUserType($user->registration);
-        // dd($user, $userType);
         $updateUser = new User($request->all());
         $updateInfo = new Information($request->all());
         User::find($user->id)->update($updateUser->getAttributes());
@@ -159,7 +155,8 @@ class UserInformationController extends Controller
     public function destroy(string $id)
     {
         $user = User::find($id);
-        $info = Information::find($user->information_id)->delete();
+        $info = Information::find($user->information_id);
+        $info->delete();
         $user->delete();
         return redirect()->route('users.index')->with('message', ["O usuário $info->name com matrícula $user->registration foi excluído do sistema!"]);
     }

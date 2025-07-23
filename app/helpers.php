@@ -50,4 +50,16 @@ use Illuminate\Support\Facades\Config;
         };
     }
 
+    if(!function_exists('getYearsArray')) {
+        function getYearsArray() {
+            $years = [];
+            $foundationYear = Constants::FOUNDATION_YEAR;
+            $currYear = (int)date("Y");
+            while($foundationYear <= $currYear) {
+                $years[] = $foundationYear++;
+            }
+            return $years;
+        }
+    }
+
 ?>
