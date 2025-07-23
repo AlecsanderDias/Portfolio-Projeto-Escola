@@ -19,8 +19,8 @@ class SchoolClassFactory extends Factory
     {
         return [
             'class_name' => fake()->text(10),
-            'room' => rand(0, count(Constants::ROOM_NAMES)),
-            'year' => rand(2021,2025),
+            'room' => rand(0, count(Constants::ROOM_NAMES)-1),
+            'year' => rand(Constants::FOUNDATION_YEAR,(int)date("Y")),
             'school_year' => rand(1, count(Constants::SCHOOL_YEARS)),
         ];
     }
