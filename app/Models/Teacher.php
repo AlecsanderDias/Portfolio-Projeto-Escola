@@ -24,4 +24,14 @@ class Teacher extends Model
     public function subjects():HasMany {
         return $this->hasMany(Subject::class, 'teacher_id');
     }
+
+    static function getTeacherByUserId(int $userId) {
+        return Teacher::select(['professional_number'])->where('user_id',$userId)->get();
+    }
+
+    static function getAllTeachersOptions() {
+        return Teacher::join('users','users.id','=','teachers.user_id')
+            ->join('informations','informations.id','=','users.information_id')
+            ->select('teachers.id','users.registration','informations.name','informations.surname')->get();
+    }
 }

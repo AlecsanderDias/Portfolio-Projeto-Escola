@@ -16,7 +16,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subjects = Subject::all()->select('id','name','subject_hours','teacher_id')->toArray();
+        $subjects = Subject::getAllSubjectFieldsArray();
         return view('subject.index', ['subjects' => $subjects]);
     }
 
@@ -25,9 +25,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        $teachers = Teacher::join('users','users.id','=','teachers.user_id')
-            ->join('informations','informations.id','=','users.information_id')
-            ->select('teachers.id','users.registration','informations.name','informations.surname')->get();
+        $teachers = Teacher::getAllTeachersOptions();
         return view('subject.createForm', ['teachers' => $teachers, 'subjectHours' => Constants::SUBJECT_HOURS]);
     }
 
@@ -54,9 +52,7 @@ class SubjectController extends Controller
     public function edit(string $id)
     {
         $subject = Subject::find($id);
-        $teachers = Teacher::join('users','users.id','=','teachers.user_id')
-            ->join('informations','informations.id','=','users.information_id')
-            ->select('teachers.id','users.registration','informations.name','informations.surname')->get();
+        $teachers = Teacher::getAllTeachersOptions();
         return view('subject.updateForm', ['subject' => $subject, 'teachers' => $teachers, 'subjectHours' => Constants::SUBJECT_HOURS]);
     }
 

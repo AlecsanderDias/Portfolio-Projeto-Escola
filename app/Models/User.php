@@ -65,4 +65,19 @@ class User extends Authenticatable
     public function information():BelongsTo {
         return $this->belongsTo(Information::class);
     }
+
+    static function getAllUsersArray() {
+        return User::join('informations','users.information_id','=','informations.id')
+            ->select([
+                'users.registration','informations.id',
+                'informations.name','informations.surname',
+                'informations.email','informations.birth_date',
+                'informations.gender','informations.cpf',
+                ])->get()->toArray();
+    }
+
+    static function getUserById(int $id) {
+        $userFields = ['id','registration','information_id'];
+        return User::select($userFields)->find($id);
+    }
 }

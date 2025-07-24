@@ -43,4 +43,8 @@ class Student extends Model
     public function subjects():BelongsToMany {
         return $this->belongsToMany(Subject::class);
     }
+
+    static function getStudentByUserId(int $userId) {
+        return Student::select(['school_year', 'school_class_id'])->where('user_id',$userId)->get();
+    }
 }

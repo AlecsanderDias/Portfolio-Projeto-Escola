@@ -41,4 +41,17 @@ class SchoolClass extends Model
     public function lessons():HasMany {
         return $this->hasMany(Lesson::class);
     }
+
+    static function getAllSchoolClassesNames() {
+        return SchoolClass::all()->select('id','class_name');
+    }
+
+    static function getAllSchoolClassesFieldsArray() {
+        return SchoolClass::all()->select('id','class_name','room','year','school_year')->toArray();
+    }
+
+    static function getSchoolClassesByCurrentYear() {
+        $year = (int)date("Y");
+        return SchoolClass::select(['id', 'class_name', 'school_year', 'room'])->where('year', $year)->get();
+    }
 }

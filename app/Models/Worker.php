@@ -23,4 +23,8 @@ class Worker extends Model
     public function user():BelongsTo {
         return $this->belongsTo(User::class);
     }
+
+    static function getWorkerByUserId(int $userId) {
+        return Worker::select(['role'])->where('user_id',$userId)->get();
+    }
 }

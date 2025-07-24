@@ -11,7 +11,8 @@ use Illuminate\Http\Request;
 class SchoolClassController extends Controller
 {
     public function index() {
-        $schoolClasses = SchoolClass::all()->select('id','class_name','room','year','school_year')->toArray();
+        // $schoolClasses = SchoolClass::all()->select('id','class_name','room','year','school_year')->toArray();
+        $schoolClasses = SchoolClass::getAllSchoolClassesFieldsArray();
         return view('schoolClass.index', ['schoolClasses' => $schoolClasses]);
     }
 
