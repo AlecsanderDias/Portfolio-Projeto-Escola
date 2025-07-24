@@ -22,14 +22,7 @@ class UserInformationController extends Controller
      */
     public function index()
     {
-
-        $data = User::join('informations','users.information_id','=','informations.id')
-            ->select([
-                'users.registration','informations.id',
-                'informations.name','informations.surname',
-                'informations.email','informations.birth_date',
-                'informations.gender','informations.cpf',
-                ])->get()->toArray();
+        $data = User::getAllUsersArray();
         return view('user.index', ['data' => $data]);
     }
 
@@ -41,7 +34,7 @@ class UserInformationController extends Controller
         $userType = $request->user_type;
         $data = new stdClass();
         if($userType === 'student') {
-            $data->schoolClasses = SchoolClass::all()->select('id','class_name');
+            $data->schoolClasses = SchoolClass::getAllSchoolClassesNames();
             $data->schoolYears = Constants::SCHOOL_YEARS;
         }
         return view('user.createForm', ['userType' => $userType, 'data' => $data]);
@@ -99,19 +92,17 @@ class UserInformationController extends Controller
      */
     public function edit(string $id)
     {
-        $userFields = ['id','registration','information_id'];
-        $informationFields = ['name','surname','email','birth_date','gender','cpf'];
-        $user = User::select($userFields)->find($id);
+        $user = User::getUserById($id);
         $userType = checkUserType($user->registration);
-        $info = Information::select($informationFields)->find($user->information_id);
-        $schoolClasses = SchoolClass::select(['id', 'class_name', 'school_year', 'room'])->where('year',2025)->get();
+        $info = Information::getInformationById($user->information_id);
+        $schoolClasses = SchoolClass::getSchoolClassesByCurrentYear();
         $role = new stdClass();
         if($userType === 'student') {
-            $role = Student::select(['school_year', 'school_class_id'])->where('user_id',$id)->get();
+            $role = Student::getStudentByUserId($id);
         } elseif($userType === 'teacher') {
-            $role = Teacher::select(['professional_number'])->where('user_id',$id)->get();
+            $role = Teacher::getTeacherByUserId($id);
         } else {
-            $role = Worker::select(['role'])->where('user_id',$id)->get();
+            $role = Worker::getWorkerByUserId($id);
         }
         $data = [
             ...$user->toArray(), 
@@ -158,6 +149,7 @@ class UserInformationController extends Controller
         $info = Information::find($user->information_id);
         $info->delete();
         $user->delete();
+        // Criar o Delete das Tabelas Teacher, Student e Worker
         return redirect()->route('users.index')->with('message', ["O usuário $info->name com matrícula $user->registration foi excluído do sistema!"]);
     }
 }

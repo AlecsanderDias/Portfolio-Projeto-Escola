@@ -33,4 +33,8 @@ class Information extends Model
         return $this->hasOne(User::class, 'information_id');
     }
 
+    static function getInformationById(int $id) {
+        $informationFields = ['name','surname','email','birth_date','gender','cpf'];
+        return Information::select($informationFields)->find($id);
+    }
 }
