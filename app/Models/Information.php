@@ -37,4 +37,9 @@ class Information extends Model
         $informationFields = ['name','surname','email','birth_date','gender','cpf'];
         return Information::select($informationFields)->find($id);
     }
+
+    static function updateInformationById(int $infoId, array $data) {
+        $updateInfo = new Information($data);
+        Information::find($infoId)->update($updateInfo->getAttributes());
+    }
 }

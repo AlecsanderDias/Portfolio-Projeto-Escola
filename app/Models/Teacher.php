@@ -34,4 +34,11 @@ class Teacher extends Model
             ->join('informations','informations.id','=','users.information_id')
             ->select('teachers.id','users.registration','informations.name','informations.surname')->get();
     }
+
+     static function updateTeacherByUserId(int $userId, array $data) {
+        $teacherId = Teacher::select(['id'])->where('user_id', $userId);
+        $updateTeacher = new Teacher($data);
+        // dd($userId, $data, $teacherId);
+        Teacher::find($teacherId)->update($updateTeacher->getAttributes());
+    }
 }

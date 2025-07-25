@@ -47,4 +47,10 @@ class Student extends Model
     static function getStudentByUserId(int $userId) {
         return Student::select(['school_year', 'school_class_id'])->where('user_id',$userId)->get();
     }
+
+    static function updateStudentByUserId(int $userId, array $data) {
+        $studentId = Student::select(['id'])->where('user_id', $userId);
+        $updateStudent = new Student($data);
+        Student::find($studentId)->update($updateStudent->getAttributes());
+    }
 }
