@@ -80,4 +80,9 @@ class User extends Authenticatable
         $userFields = ['id','registration','information_id'];
         return User::select($userFields)->find($id);
     }
+
+    static function updateUserById(int $userId, array $data) {
+        $updateUser = new User($data);
+        User::find($userId)->update($updateUser->getAttributes());
+    }
 }

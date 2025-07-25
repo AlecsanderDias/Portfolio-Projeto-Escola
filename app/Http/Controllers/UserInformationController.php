@@ -119,23 +119,22 @@ class UserInformationController extends Controller
      */
     public function update(UpdateUserInformationRequest $request, User $user)
     {
+        // dd($request->all(), $request->except(['_method','_token']));
         $userType = checkUserType($user->registration);
-        $updateUser = new User($request->all());
-        $updateInfo = new Information($request->all());
-        User::find($user->id)->update($updateUser->getAttributes());
-        Information::find($user->information_id)->update($updateInfo->getAttributes());
+        // $updateUser = new User($request->all());
+        // $updateInfo = new Information($request->all());
+        // User::find($user->id)->update($updateUser->getAttributes());
+        // Information::find($user->information_id)->update($updateInfo->getAttributes());
+
+        User::updateUserById($user->id, $request->all());
+        Information::updateInformationById($user->information_id, $request->all());
+
         if($userType === 'student') {
-            $studentId = Student::select(['id'])->where('user_id',$user->id);
-            $updateStudent = new Student($request->all());
-            Student::find($studentId)->update($updateStudent->getAttributes());
+            Student::updateStudentByUserId($user->id, $request->all());
         } elseif($userType === 'teacher') {
-            $teacherId = Teacher::select(['id'])->where('user_id',$user->id);
-            $updateTeacher = new Teacher($request->all());
-            Teacher::find($teacherId)->update($updateTeacher->getAttributes());
+            Teacher::updateTeacherByUserId($user->id, $request->all());
         } else {
-            $workerId = Worker::select(['id'])->where('user_id',$user->id);
-            $updateWorker = new Worker($request->all());
-            Worker::find($workerId)->update($updateWorker->getAttributes());
+            Worker::updateWorkerByUserId($user->id, $request->all());
         }
         return redirect()->route('users.index')->with('message', ["O usuário com registro $user->registration do tipo $userType foi atualizado com sucesso!"]);
     }

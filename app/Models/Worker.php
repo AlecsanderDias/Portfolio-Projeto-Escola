@@ -27,4 +27,10 @@ class Worker extends Model
     static function getWorkerByUserId(int $userId) {
         return Worker::select(['role'])->where('user_id',$userId)->get();
     }
+
+    static function updateWorkerByUserId(int $userId, array $data) {
+        $workerId = Worker::select(['id'])->where('user_id', $userId);
+        $updateWorker = new Worker($data);
+        Worker::find($workerId)->update($updateWorker->getAttributes());
+    }
 }
