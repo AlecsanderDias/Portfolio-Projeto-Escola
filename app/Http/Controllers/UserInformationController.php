@@ -119,16 +119,9 @@ class UserInformationController extends Controller
      */
     public function update(UpdateUserInformationRequest $request, User $user)
     {
-        // dd($request->all(), $request->except(['_method','_token']));
         $userType = checkUserType($user->registration);
-        // $updateUser = new User($request->all());
-        // $updateInfo = new Information($request->all());
-        // User::find($user->id)->update($updateUser->getAttributes());
-        // Information::find($user->information_id)->update($updateInfo->getAttributes());
-
         User::updateUserById($user->id, $request->all());
         Information::updateInformationById($user->information_id, $request->all());
-
         if($userType === 'student') {
             Student::updateStudentByUserId($user->id, $request->all());
         } elseif($userType === 'teacher') {
@@ -144,7 +137,16 @@ class UserInformationController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = User::find($id);
+        // $user = User::find($id);
+        $user = User::deleteUserById($id);
+        $userType = checkUserType($user->registration);
+        if($userType === 'student') {
+            Student::deleteStudentByUserId($user->id);
+        } elseif ($userType === 'teacher') {
+            Teacher::deleteTeacherByUserId($user->id);
+        } else {
+            Worker::deleteWorkerByUserId($user->id);            
+        }
         $info = Information::find($user->information_id);
         $info->delete();
         $user->delete();

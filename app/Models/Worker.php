@@ -33,4 +33,9 @@ class Worker extends Model
         $updateWorker = new Worker($data);
         Worker::find($workerId)->update($updateWorker->getAttributes());
     }
+
+    static function deleteWorkerByUserId(int $userId) {
+        $workerId = Worker::select('id')->where('user_id', $userId)->get()->toArray();
+        Worker::find($workerId[0]['id'])->delete();
+    }
 }
