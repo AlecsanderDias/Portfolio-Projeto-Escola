@@ -35,10 +35,14 @@ class Teacher extends Model
             ->select('teachers.id','users.registration','informations.name','informations.surname')->get();
     }
 
-     static function updateTeacherByUserId(int $userId, array $data) {
+    static function updateTeacherByUserId(int $userId, array $data) {
         $teacherId = Teacher::select(['id'])->where('user_id', $userId);
         $updateTeacher = new Teacher($data);
-        // dd($userId, $data, $teacherId);
         Teacher::find($teacherId)->update($updateTeacher->getAttributes());
+    }
+
+    static function deleteTeacherByUserId(int $userId) {
+        $teacherId = Teacher::select('id')->where('user_id', $userId)->get()->toArray();
+        Teacher::find($teacherId[0]['id'])->delete();
     }
 }

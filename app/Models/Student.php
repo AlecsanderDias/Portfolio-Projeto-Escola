@@ -53,4 +53,9 @@ class Student extends Model
         $updateStudent = new Student($data);
         Student::find($studentId)->update($updateStudent->getAttributes());
     }
+
+    static function deleteStudentByUserId(int $userId) {
+        $studentId = Student::select('id')->where('user_id', $userId)->get()->toArray();
+        Student::find($studentId[0]['id'])->delete;
+    }
 }

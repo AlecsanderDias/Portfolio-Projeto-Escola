@@ -42,4 +42,8 @@ class Information extends Model
         $updateInfo = new Information($data);
         Information::find($infoId)->update($updateInfo->getAttributes());
     }
+
+    static function deleteInformationByUserId(int $userId) {
+        
+    }
 }
