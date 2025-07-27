@@ -137,8 +137,8 @@ class UserInformationController extends Controller
      */
     public function destroy(string $id)
     {
-        // $user = User::find($id);
         $user = User::deleteUserById($id);
+        $info = Information::deleteInformationByUserId($user->id);
         $userType = checkUserType($user->registration);
         if($userType === 'student') {
             Student::deleteStudentByUserId($user->id);
@@ -147,10 +147,6 @@ class UserInformationController extends Controller
         } else {
             Worker::deleteWorkerByUserId($user->id);            
         }
-        $info = Information::find($user->information_id);
-        $info->delete();
-        $user->delete();
-        // Criar o Delete das Tabelas Teacher, Student e Worker
         return redirect()->route('users.index')->with('message', ["O usuário $info->name com matrícula $user->registration foi excluído do sistema!"]);
     }
 }

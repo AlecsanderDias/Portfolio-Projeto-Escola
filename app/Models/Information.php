@@ -43,7 +43,8 @@ class Information extends Model
         Information::find($infoId)->update($updateInfo->getAttributes());
     }
 
-    static function deleteInformationByUserId(int $userId) {
-        
+    static function deleteInformationById(int $id) {
+        $info = Information::find($id)->delete();
+        return $info;
     }
 }
