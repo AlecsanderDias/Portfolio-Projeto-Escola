@@ -54,4 +54,16 @@ class SchoolClass extends Model
         $year = (int)date("Y");
         return SchoolClass::select(['id', 'class_name', 'school_year', 'room'])->where('year', $year)->get();
     }
+
+    static function updateSchoolClassById(int $id, array $data) {
+        $schoolClass = new SchoolClass($data);
+        SchoolClass::find($id)->update($schoolClass->getAttributes());
+        return $schoolClass;
+    }
+
+    static function deleteSchoolClassById(int $id) {
+        $schoolClass = SchoolClass::find($id);
+        $schoolClass->delete();
+        return $schoolClass;
+    }
 }

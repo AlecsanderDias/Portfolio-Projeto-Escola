@@ -86,9 +86,8 @@ class User extends Authenticatable
         User::find($userId)->update($updateUser->getAttributes());
     }
 
-    static function deleteUserById(int $userId) {
-        $user = User::find($userId);
-        // $user->delete();
+    static function deleteUserById(int $id) {
+        $user = User::find($id)->delete();
         return $user;
     }
 }

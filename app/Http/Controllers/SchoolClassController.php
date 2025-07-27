@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 class SchoolClassController extends Controller
 {
     public function index() {
-        // $schoolClasses = SchoolClass::all()->select('id','class_name','room','year','school_year')->toArray();
         $schoolClasses = SchoolClass::getAllSchoolClassesFieldsArray();
         return view('schoolClass.index', ['schoolClasses' => $schoolClasses]);
     }
@@ -37,14 +36,12 @@ class SchoolClassController extends Controller
     }
 
     public function update(UpdateSchoolClassRequest $request, string $id) {
-        $schoolClass = new SchoolClass($request->all());
-        SchoolClass::find($id)->update($schoolClass->getAttributes());
+        $schoolClass = SchoolClass::updateSchoolClassById($id, $request->all());
         return redirect()->route('schoolClasses.index')->with('message', ["Turma $schoolClass->name com id => $id atualizada com sucesso!"]);
     }
 
     public function destroy(string $id) {
-        $schoolClass = SchoolClass::find($id);
-        $schoolClass->delete();
-        return redirect()->route('schoolClasses.index')->with('message', ["Turma $schoolClass->name com id => $id foi deletado com sucesso!"]);
+        $schoolClass = SchoolClass::deleteSchoolClassById($id);
+        return redirect()->route('schoolClasses.index')->with('message', ["Turma $schoolClass->class_name com id => $id foi deletado com sucesso!"]);
     }
 }
