@@ -38,4 +38,8 @@ class Grade extends Model
     public function createStudentGrades($studentId) {
         
     }
+
+    public function getAllGradesArray() {
+        return Grade::all()->toArray();
+    }
 }

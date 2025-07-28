@@ -58,4 +58,15 @@ class Student extends Model
         $studentId = Student::select('id')->where('user_id', $userId)->get()->toArray();
         Student::find($studentId[0]['id'])->delete;
     }
+
+    static function getAllStudentsArray() {
+        return Student::all()->toArray();
+    }
+
+    static function getAllStudentsInformationsArray() {
+        return Student::join('users','users.id','=','students.user_id')
+            ->join('informations','users.information_id','=','informations.id')
+            ->select(['students.id','informations.name','informations.surname','users.registration','students.school_class_id','students.school_year'])
+            ->get()->toArray();
+    }
 }
