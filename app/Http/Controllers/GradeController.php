@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Grade;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class GradeController extends Controller
@@ -13,7 +14,8 @@ class GradeController extends Controller
     public function index()
     {
         $grades = Grade::all()->toArray();
-        return view('grade.index', ['grades' => $grades]);
+        $studentsInformations = Student::getAllStudentsInformationsArray();
+        return view('grade.index', ['grades' => $grades, 'studentsInformations' => $studentsInformations]);
     }
 
     /**
