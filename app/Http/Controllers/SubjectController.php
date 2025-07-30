@@ -26,7 +26,9 @@ class SubjectController extends Controller
     public function create()
     {
         $teachers = Teacher::getAllTeachersOptions();
-        return view('subject.createForm', ['teachers' => $teachers, 'subjectHours' => Constants::SUBJECT_HOURS]);
+        return view('subject.createForm', ['teachers' => $teachers,
+        'subjectNames' => Constants::CORE_SUBJECTS,
+        'subjectHours' => Constants::SUBJECT_HOURS]);
     }
 
     /**

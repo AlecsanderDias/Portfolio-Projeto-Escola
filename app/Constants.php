@@ -24,6 +24,20 @@ class Constants {
 
     const SUBJECT_HOURS = [20, 40, 60, 80];
 
+    const CORE_SUBJECTS = [
+        'Matemática',
+        'Química',
+        'Português',
+        'Física',
+        'Geografia',
+        'Biologia',
+        'História',
+        'Educação Física',
+        'Sociologia',
+        'Filosofia',
+        'Artes',
+    ];
+
     const SCHOOL_YEARS = [
         1 => "1º Ano",
         2 => "2º Ano",

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Constants;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -35,8 +36,12 @@ class Grade extends Model
         return $this->belongsTo(Subject::class);
     }
 
-    public function createStudentGrades($studentId) {
-        
+    static function createStudentGrades($studentId) {
+        foreach(Constants::CORE_SUBJECTS as $subject) {
+            Grade::create([
+                'student_id' => $studentId
+            ]);
+        };
     }
 
     public function getAllGradesArray() {

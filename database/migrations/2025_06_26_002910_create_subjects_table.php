@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
             $table->foreignId('teacher_id')->nullable();
-            $table->string('name');
+            $table->string('subject_name');
             $table->integer('subject_hours');
             $table->timestamps();
             $table->softDeletes();
