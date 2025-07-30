@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Constants;
 use App\Http\Requests\CreateUserInformationRequest;
 use App\Http\Requests\UpdateUserInformationRequest;
+use App\Models\Grade;
 use App\Models\Information;
 use App\Models\SchoolClass;
 use App\Models\Student;
@@ -47,7 +48,7 @@ class UserInformationController extends Controller
         $pass = generatePassword(7);
         $registration = generateRegistration($request->user_type);
         $info = Information::create([
-            'name' => $request->name,
+            'subject_name' => $request->name,
             'surname' => $request->surname,
             'email' => $request->email,
             'birth_date' => Date::now(),
@@ -60,11 +61,12 @@ class UserInformationController extends Controller
             'information_id' => $info->id,
         ]);
         if($request->user_type === "student") {
-            Student::create([
+            $student = Student::create([
                 'user_id' => $user->id,
                 'school_year' => $request->school_year,
                 'school_class_id' => $request->school_class_id,
             ]);
+            Grade::createStudentGrades($student->id);
         } elseif($request->user_type === "teacher") {
             Teacher::create([
                 'user_id' => $user->id,

@@ -7,7 +7,12 @@
         @csrf
         <div>
             <label for="name">Nome da Disciplina:</label>
-            <input type="text" name="name" id="name" value="{{ old('name') }}">
+            {{-- <input type="text" name="name" id="name" value="{{ old('name') }}"> --}}
+            <select name="subject_hours" id="subject_hours">
+                @foreach ($subjectNames as $names)
+                    <option value="{{ $names }}" @if(old('name') == $names) selected @endif>{{ $names }} horas</option>
+                @endforeach
+            </select>
         </div>
         <div>
             <label for="subject_hours">Carga Horária:</label>
