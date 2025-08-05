@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Constants;
 use App\Models\Subject;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,6 +14,9 @@ class SubjectSeeder extends Seeder
      */
     public function run(): void
     {
-        Subject::factory(env('SUBJECT_SEEDER', 10))->create();
+        foreach(Constants::CORE_SUBJECTS as $subject) {
+            // Subject::factory(env('SUBJECT_SEEDER', 10))->create();
+            Subject::factory()->create(['subject_name' => $subject]);
+        }
     }
 }

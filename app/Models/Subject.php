@@ -16,7 +16,7 @@ class Subject extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'subject_name',
         'subject_hours',
         'teacher_id'
     ];
