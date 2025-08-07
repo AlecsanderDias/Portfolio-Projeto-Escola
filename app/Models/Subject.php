@@ -18,6 +18,7 @@ class Subject extends Model
     protected $fillable = [
         'subject_name',
         'subject_hours',
+        'school_year',
         'teacher_id'
     ];
 
@@ -59,6 +60,10 @@ class Subject extends Model
     // }
 
     static function getAllSubjectFieldsArray() {
-        return Subject::all()->select('id','name','subject_hours','teacher_id')->toArray();
+        return Subject::all()->select('id','subject_name','subject_hours','school_year','teacher_id')->toArray();
+    }
+
+    static function getAllSubjectsIdArray() {
+        return Subject::all('id')->toArray();
     }
 }

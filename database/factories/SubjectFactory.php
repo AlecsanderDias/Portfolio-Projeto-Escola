@@ -21,10 +21,12 @@ class SubjectFactory extends Factory
     {
         $rdName = rand(0, sizeof(Constants::CORE_SUBJECTS)-1);
         $rdHours = rand(0, sizeof(Constants::SUBJECT_HOURS)-1);
+        $rdYear = rand(1, sizeof(Constants::SCHOOL_YEARS));
         $maxId = max(Teacher::all('id')->toArray());
         return [
             'subject_name' => Constants::CORE_SUBJECTS[$rdName],
             'subject_hours' => Constants::SUBJECT_HOURS[$rdHours],
+            'school_year' => Constants::SCHOOL_YEARS[$rdYear],
             'teacher_id' => rand(1, $maxId['id']),
         ];
     }

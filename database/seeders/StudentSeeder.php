@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Grade;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -17,6 +18,7 @@ class StudentSeeder extends Seeder
         Student::factory()
             ->count(env('STUDENT_SEEDER',10))
             ->has(User::factory())
+            // ->has(Grade::factory())
             // ->hasUser(1, [
             //     'registration' => generateRegistration('student')
             // ])

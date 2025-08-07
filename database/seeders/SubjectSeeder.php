@@ -14,9 +14,14 @@ class SubjectSeeder extends Seeder
      */
     public function run(): void
     {
-        foreach(Constants::CORE_SUBJECTS as $subject) {
-            // Subject::factory(env('SUBJECT_SEEDER', 10))->create();
-            Subject::factory()->create(['subject_name' => $subject]);
+        foreach(Constants::SCHOOL_YEARS as $year => $schoolYear) {
+            foreach(Constants::CORE_SUBJECTS as $subject) {
+                // Subject::factory(env('SUBJECT_SEEDER', 10))->create();
+                Subject::factory()->create([
+                    'subject_name' => $subject,
+                    'school_year' => $year
+                ]);
+            }
         }
     }
 }

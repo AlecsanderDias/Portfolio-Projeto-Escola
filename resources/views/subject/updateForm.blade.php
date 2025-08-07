@@ -7,8 +7,13 @@
         @method('PUT')
         @csrf
         <div>
-            <label for="name">Nome da Disciplina:</label>
             <input type="text" name="name" id="name" value="{{ $subject->name }}">
+            <label for="subject_name">Nome da Disciplina:</label>
+            <select name="subject_name" id="subject_name">
+                @foreach ($subjectNames as $names)
+                    <option value="{{ $names }}" @if($subject->name == $names) selected @endif>{{ $names }} horas</option>
+                @endforeach
+            </select>
         </div>
         <div>
             <label for="subject_hours">Carga Horária:</label>

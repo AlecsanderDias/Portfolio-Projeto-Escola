@@ -6,9 +6,9 @@
     <form action="{{ route('subjects.store') }}" method="POST">
         @csrf
         <div>
-            <label for="name">Nome da Disciplina:</label>
+            <label for="subject_name">Nome da Disciplina:</label>
             {{-- <input type="text" name="name" id="name" value="{{ old('name') }}"> --}}
-            <select name="subject_hours" id="subject_hours">
+            <select name="subject_name" id="subject_name">
                 @foreach ($subjectNames as $names)
                     <option value="{{ $names }}" @if(old('name') == $names) selected @endif>{{ $names }} horas</option>
                 @endforeach
