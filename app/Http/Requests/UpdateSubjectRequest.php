@@ -22,7 +22,7 @@ class UpdateSubjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|min:3|max:20',
+            'subject_name' => 'required|string|min:3|max:20',
             'subject_hours' => 'integer|between:20,80',
             // 'teacher_id' => 'integer',
         ];
@@ -31,7 +31,7 @@ class UpdateSubjectRequest extends FormRequest
     public function messages()
     {
         return [
-            'name' => [
+            'subject_name' => [
                 'required' => 'O campo Nome é obrigatório',
                 'string' => 'O valor do campo Nome está inválido',
                 'min' => 'O campo Nome precisa de no mínimo :min caracteres',

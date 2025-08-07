@@ -16,8 +16,8 @@ class Grade extends Model
      */
     protected $fillable = [
         'quarter',
-        'firstTest',
-        'secondTest'
+        'first_test',
+        'second_test'
     ];
 
     /**
@@ -44,7 +44,7 @@ class Grade extends Model
         };
     }
 
-    public function getAllGradesArray() {
+    static function getAllGradesArray() {
         return Grade::all()->toArray();
     }
 }

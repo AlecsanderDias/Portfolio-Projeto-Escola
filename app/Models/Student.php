@@ -69,4 +69,8 @@ class Student extends Model
             ->select(['students.id','informations.name','informations.surname','users.registration','students.school_class_id','students.school_year'])
             ->get()->toArray();
     }
+
+    static function getAllStudentsIdArray() {
+        return Student::all('id')->toArray();
+    }
 }

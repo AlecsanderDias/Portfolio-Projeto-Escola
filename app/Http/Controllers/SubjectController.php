@@ -55,7 +55,10 @@ class SubjectController extends Controller
     {
         $subject = Subject::find($id);
         $teachers = Teacher::getAllTeachersOptions();
-        return view('subject.updateForm', ['subject' => $subject, 'teachers' => $teachers, 'subjectHours' => Constants::SUBJECT_HOURS]);
+        return view('subject.updateForm', ['subject' => $subject, 
+            'subjectNames' => Constants::CORE_SUBJECTS, 
+            'teachers' => $teachers, 
+            'subjectHours' => Constants::SUBJECT_HOURS]);
     }
 
     /**

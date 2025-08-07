@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('class_name');
             $table->string('room');
             $table->year('year');
-            $table->string('school_year');
+            $table->integer('school_year');
             $table->timestamps();
             $table->softDeletes();
         });
