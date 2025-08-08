@@ -45,4 +45,11 @@ class Teacher extends Model
         $teacherId = Teacher::select('id')->where('user_id', $userId)->get()->toArray();
         Teacher::find($teacherId[0]['id'])->delete();
     }
+
+    static function getAllTeachersIdNameArray() {
+        return Teacher::join('users','users.id','=','teachers.user_id')
+            ->join('informations','informations.id','=','users.information_id')
+            ->select(['teachers.id','informations.name','informations.surname'])
+            ->get()->toArray();
+    }
 }

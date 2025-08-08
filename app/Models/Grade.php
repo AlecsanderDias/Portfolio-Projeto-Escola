@@ -28,8 +28,8 @@ class Grade extends Model
         'subject_id' => null
     ];
 
-    public function users():BelongsTo {
-        return $this->belongsTo(User::class);
+    public function students():BelongsTo {
+        return $this->belongsTo(Student::class);
     }
 
     public function subjects():BelongsTo {
@@ -45,6 +45,14 @@ class Grade extends Model
     }
 
     static function getAllGradesArray() {
-        return Grade::all()->toArray();
+        return Grade::all(['id','quarter','first_test','second_test','student_id','subject_id'])->toArray();
+    }
+
+    static function getAllGradesDetailsArray() {
+        return Grade::join('subjects','subject_id','=','subjects.id')
+            ->join('students','student_id','=','students.id')
+            ->join('users','users.id','=','students.user_id')
+            ->join('informations','informations.id','=','users.information_id')
+            ->select(['grades.id','users.registration','informations.name','informations.surname','students.school_year','students.school_class_id','subjects.subject_name','grades.quarter','grades.first_test','grades.second_test'])->get()->toArray();
     }
 }
