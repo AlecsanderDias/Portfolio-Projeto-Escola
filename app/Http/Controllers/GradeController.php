@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants;
 use App\Models\Grade;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -16,6 +17,7 @@ class GradeController extends Controller
     {
         $grades = Grade::getAllGradesDetailsArray();
         $teachers = Teacher::getAllTeachersIdNameArray();
+        // dd($grades);
         return view('grade.index', ['grades' => $grades, 'teachers' => $teachers]);
     }
 
@@ -32,23 +34,24 @@ class GradeController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
-
+    
     /**
      * Display the specified resource.
-     */
+    */
     public function show(string $id)
     {
         //
     }
-
+    
     /**
      * Show the form for editing the specified resource.
-     */
+    */
     public function edit(string $id)
     {
-        //
+        $grade = Grade::getGradeById($id);
+        $quarters = Constants::QUARTERS;
+        return view('grade.updateForm', ['grade' => $grade, 'quarters' => $quarters]);
     }
 
     /**
