@@ -55,4 +55,8 @@ class Grade extends Model
             ->join('informations','informations.id','=','users.information_id')
             ->select(['grades.id','users.registration','informations.name','informations.surname','students.school_year','students.school_class_id','subjects.subject_name','grades.quarter','grades.first_test','grades.second_test'])->get()->toArray();
     }
+
+    static function getGradeById($gradeId) {
+        return Grade::find($gradeId)->toArray();
+    }
 }

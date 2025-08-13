@@ -52,6 +52,13 @@ class Constants {
     ];
 
     const FOUNDATION_YEAR = 2021;
+
+    const QUARTERS = [
+        1 => 'Primeiro',
+        2 => 'Segundo',
+        3 => 'Terceiro',
+        4 => 'Quarto'
+    ];
 }
 
 ?>
