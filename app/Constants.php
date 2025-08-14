@@ -54,10 +54,10 @@ class Constants {
     const FOUNDATION_YEAR = 2021;
 
     const QUARTERS = [
-        1 => 'Primeiro',
-        2 => 'Segundo',
-        3 => 'Terceiro',
-        4 => 'Quarto'
+        1 => '1º Bimestre',
+        2 => '2º Bimestre',
+        3 => '3º Bimestre',
+        4 => '4º Bimestre'
     ];
 }
 

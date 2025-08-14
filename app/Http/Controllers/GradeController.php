@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Constants;
+use App\Http\Requests\UpdateGradeRequest;
 use App\Models\Grade;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -51,15 +52,17 @@ class GradeController extends Controller
     {
         $grade = Grade::getGradeById($id);
         $quarters = Constants::QUARTERS;
-        return view('grade.updateForm', ['grade' => $grade, 'quarters' => $quarters]);
+        $subjects = Constants::CORE_SUBJECTS;
+        return view('grade.updateForm', ['grade' => $grade, 'quarters' => $quarters, 'subjects' => $subjects]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateGradeRequest $request, string $id)
     {
-        //
+        Grade::updateGradeById($id, $request->all());
+        return redirect()->route('grades.index')->with('message', ["Nota com id => $id atualizada com sucesso!"]);
     }
 
     /**
@@ -67,6 +70,7 @@ class GradeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $grade = Grade::deleteGradeById($id);
+        return redirect()->route('grades.index')->with('message', ["Nota com id => $id deletado com sucesso!"]);
     }
 }
