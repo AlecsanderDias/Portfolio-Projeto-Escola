@@ -56,7 +56,19 @@ class Grade extends Model
             ->select(['grades.id','users.registration','informations.name','informations.surname','students.school_year','students.school_class_id','subjects.subject_name','grades.quarter','grades.first_test','grades.second_test'])->get()->toArray();
     }
 
-    static function getGradeById($gradeId) {
-        return Grade::find($gradeId)->toArray();
+    static function getGradeById(int $gradeId) {
+        return Grade::select(['grades.id','grades.student_id','grades.subject_id','grades.quarter','grades.first_test','grades.second_test'])->find($gradeId);
+    }
+
+    static function updateGradeById(int $gradeId, array $gradeData) {
+        $grade = new Grade($gradeData);
+        Grade::find($gradeId)->update($grade->getAttributes());
+        return $grade;
+    }
+
+    static function deleteGradeById(int $gradeId) {
+        $grade = Grade::find($gradeId);
+        $grade->delete();
+        return $grade;
     }
 }
