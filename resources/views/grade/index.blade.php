@@ -25,9 +25,6 @@
     @else
         <p>Não há notas no sistema!</p>
     @endif
-    <a href="{{ route('grades.create') }}">
-        <button>Gerar Notas</button>
-    </a>
     <a href="{{ route('home') }}">
         <button>Dashboard</button>
     </a>

@@ -17,7 +17,9 @@ class Grade extends Model
     protected $fillable = [
         'quarter',
         'first_test',
-        'second_test'
+        'second_test',
+        'student_id',
+        'subject_id'
     ];
 
     /**
@@ -25,7 +27,9 @@ class Grade extends Model
      */
     protected $attributes = [
         'student_id' => null,
-        'subject_id' => null
+        'subject_id' => null,
+        'first_test' => null,
+        'second_test' => null,
     ];
 
     public function students():BelongsTo {
@@ -36,11 +40,14 @@ class Grade extends Model
         return $this->belongsTo(Subject::class);
     }
 
-    static function createStudentGrades($studentId) {
+    static function createStudentGrades(int $studentId) {
         foreach(Constants::CORE_SUBJECTS as $subject) {
-            Grade::create([
-                'student_id' => $studentId
-            ]);
+            foreach(Constants::QUARTERS as $key => $quarter) {
+                Grade::create([
+                    'student_id' => $studentId,
+                    'quarter' => $key,
+                ]);
+            }
         };
     }
 
