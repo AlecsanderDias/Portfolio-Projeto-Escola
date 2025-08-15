@@ -48,7 +48,7 @@ class UserInformationController extends Controller
         $pass = generatePassword(7);
         $registration = generateRegistration($request->user_type);
         $info = Information::create([
-            'subject_name' => $request->name,
+            'name' => $request->name,
             'surname' => $request->surname,
             'email' => $request->email,
             'birth_date' => Date::now(),

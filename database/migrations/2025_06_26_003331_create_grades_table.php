@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('student_id')->nullable();
             $table->foreignId('subject_id')->nullable();
             $table->integer('quarter');
-            $table->float('first_test');
-            $table->float('second_test');
+            $table->float('first_test')->nullable();
+            $table->float('second_test')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
