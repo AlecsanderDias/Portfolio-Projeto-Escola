@@ -20,6 +20,9 @@
     <a href="{{ route('grades.index') }}">
         <button>Notas</button>
     </a>
+    <a href="{{ route('lessons.index') }}">
+        <button>Aulas</button>
+    </a>
     <form action="{{ route('logout') }}" method="post">
         @csrf
         <button type="submit">Logout</button>

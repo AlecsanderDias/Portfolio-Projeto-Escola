@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GradeController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SchoolClassController;
 use App\Http\Controllers\SubjectController;
@@ -17,3 +18,4 @@ Route::resource('/users', UserInformationController::class)->except('show')->mid
 Route::resource('/schoolClasses', SchoolClassController::class)->except('show')->middleware('auth');
 Route::resource('/subjects', SubjectController::class)->except('show')->middleware('auth');
 Route::resource('/grades', GradeController::class)->except('show')->middleware('auth');
+Route::resource('/lessons', LessonController::class)->except('show')->middleware('auth');

@@ -17,6 +17,8 @@ class Lesson extends Model
     protected $fillable = [
         'day',
         'time',
+        'subject_id',
+        'school_class_id',
     ];
 
     /**
@@ -37,5 +39,9 @@ class Lesson extends Model
 
     public function schoolClasses():BelongsTo {
         return $this->belongsTo(SchoolClass::class);
+    }
+
+    static function getAllClassesArray() {
+        return Lesson::all(['id','day','time','subject_id','school_class_id'])->toArray();
     }
 }
