@@ -59,6 +59,10 @@ class Constants {
         3 => '3º Bimestre',
         4 => '4º Bimestre'
     ];
+
+    const LESSON_TIMES = [
+        '07:30','08:15','09:00','10:00','10:45','11:30',
+    ];
 }
 
 ?>

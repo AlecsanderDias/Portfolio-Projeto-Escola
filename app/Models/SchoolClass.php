@@ -66,4 +66,8 @@ class SchoolClass extends Model
         $schoolClass->delete();
         return $schoolClass;
     }
+
+    static function getAllSchoolClassesIdArray() {
+        return SchoolClass::all('id')->toArray();
+    }
 }
