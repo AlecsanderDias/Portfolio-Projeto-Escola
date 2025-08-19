@@ -22,7 +22,7 @@ class LessonFactory extends Factory
 
         $maxSubjectId = max(Subject::getAllSubjectsIdArray());
         $maxSchoolClassId = max(SchoolClass::getAllSchoolClassesIdArray());
-        $time = rand(0, (int)sizeof(Constants::LESSON_TIMES)-1);
+        $time = rand(0, (int)sizeof(Constants::LESSONS_SCHEDULE)-1);
         return [
             'day' => date('dd-mm-YYYY'),
             'time' => $time,

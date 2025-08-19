@@ -36,6 +36,7 @@ class Constants {
         'Sociologia',
         'Filosofia',
         'Artes',
+        'Ensino Religioso'
     ];
 
     const SCHOOL_YEARS = [
@@ -60,8 +61,23 @@ class Constants {
         4 => '4º Bimestre'
     ];
 
-    const LESSON_TIMES = [
-        '07:30','08:15','09:00','10:00','10:45','11:30',
+    const LESSONS_SCHEDULE = [
+        '07:30','08:20','09:10','10:20','11:10'
+    ];
+
+    const SUBJECTS_LESSONS_QUANTITY = [
+        'Matemática' => 3,
+        'Português' => 3,
+        'Química' => 2,
+        'Física' => 2,
+        'Geografia' => 2,
+        'Biologia' => 2,
+        'História' => 2,
+        'Educação Física' => 2,
+        'Sociologia' => 2,
+        'Filosofia' => 2,
+        'Artes' => 2,
+        'Ensino Religioso' => 1,
     ];
 }
 
