@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants;
 use App\Models\Lesson;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,7 @@ class LessonController extends Controller
     public function index()
     {
         $lessons = Lesson::getAllClassesArray();
+        $schedule = Constants::LESSONS_SCHEDULE;
         return view('lesson.index',['lessons' => $lessons]);
     }
 
