@@ -79,6 +79,14 @@ class Constants {
         'Artes' => 2,
         'Ensino Religioso' => 1,
     ];
+
+    const SCHOOL_DAYS = [
+        'Mon', 'Tue', 'Wed', 'Thu', 'Fri'
+    ];
+
+    const HOLIDAYS = [
+
+    ];
 }
 
 ?>

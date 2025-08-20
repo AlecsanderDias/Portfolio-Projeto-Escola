@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,8 +26,8 @@ class Lesson extends Model
      * @var array
      */
     protected $attributes = [
-        'subject_id',
-        'school_class_id'
+        'subject_id' => null,
+        'school_class_id' => null,
     ];
 
     public function subjects():BelongsTo {
@@ -41,7 +42,11 @@ class Lesson extends Model
         return $this->belongsTo(SchoolClass::class);
     }
 
-    static function getAllClassesArray() {
+    static function getAllLessonsArray() {
         return Lesson::all(['id','day','time','subject_id','school_class_id'])->toArray();
+    }
+
+    static function createAllSemesterLessons(int $semester, DateTime $startDate, DateTime $endDate) {
+        
     }
 }

@@ -13,9 +13,13 @@ class LessonController extends Controller
      */
     public function index()
     {
-        $lessons = Lesson::getAllClassesArray();
+        $lessons = Lesson::getAllLessonsArray();
         $schedule = Constants::LESSONS_SCHEDULE;
-        return view('lesson.index',['lessons' => $lessons]);
+        $schoolDays = Constants::SCHOOL_DAYS;
+        return view('lesson.index',[
+            'lessons' => $lessons, 'schedule' => $schedule,
+            'schoolDays' => $schoolDays,
+        ]);
     }
 
     /**
