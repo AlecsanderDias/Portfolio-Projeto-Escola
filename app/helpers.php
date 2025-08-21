@@ -62,4 +62,21 @@ use Illuminate\Support\Facades\Config;
         }
     }
 
+    if(!function_exists('getDateInterval')) {
+        function getDateInterval(string $startDate, string $endDate):array {
+            $interval = [];
+            $start = new DateTime($startDate);
+            $end = new DateTime($endDate);
+            $numberOfDays = $start->diff($end);
+            for($i=0; $i <= $numberOfDays->days; $i++) {
+                $day = $start->format('D');
+                if(in_array($day, Constants::SCHOOL_DAYS)) {
+                    $interval[] = $start->format(Constants::DATE_PATTERN);
+                }
+                $start->modify('+1 day');
+            }
+            return $interval;
+        }
+    }
+
 ?>

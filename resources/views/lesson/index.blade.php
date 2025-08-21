@@ -28,6 +28,9 @@
     <a href="{{ route('home') }}">
         <button>Dashboard</button>
     </a>
+    <a href="{{ route('lessons.create') }}">
+        <button>Criar Aulas</button>
+    </a>
     <form action="{{ route('logout') }}" method="post">
         @csrf
         <button type="submit">Logout</button>

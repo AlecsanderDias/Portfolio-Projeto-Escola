@@ -87,6 +87,8 @@ class Constants {
     const HOLIDAYS = [
 
     ];
+
+    const DATE_PATTERN = "Y-m-d";
 }
 
 ?>
