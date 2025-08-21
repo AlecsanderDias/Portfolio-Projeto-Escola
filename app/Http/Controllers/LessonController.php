@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Constants;
 use App\Models\Lesson;
+use DateTime;
 use Illuminate\Http\Request;
 
 class LessonController extends Controller
@@ -27,7 +28,10 @@ class LessonController extends Controller
      */
     public function create()
     {
-        //
+        // $today = new DateTime();
+        $today = date(Constants::DATE_PATTERN);
+        $tomorrow = date(Constants::DATE_PATTERN, strtotime('tomorrow'));
+        return view('lesson.createForm', ['today' => $today, 'tomorrow' => $tomorrow]);
     }
 
     /**
@@ -35,7 +39,8 @@ class LessonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $res = getDateInterval($request->startDate, $request->endDate);
+        dd($res);
     }
 
     /**
