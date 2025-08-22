@@ -25,11 +25,11 @@ class Attendance extends Model
         'school_class_id' => null
     ];
 
-    public function users():BelongsTo {
+    public function user():BelongsTo {
         return $this->belongsTo(User::class);
     }
 
-    public function lessons():BelongsTo {
+    public function lesson():BelongsTo {
         return $this->belongsTo(Lesson::class);
     }
 }

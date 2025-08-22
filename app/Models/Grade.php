@@ -32,11 +32,11 @@ class Grade extends Model
         'second_test' => null,
     ];
 
-    public function students():BelongsTo {
+    public function student():BelongsTo {
         return $this->belongsTo(Student::class);
     }
 
-    public function subjects():BelongsTo {
+    public function subject():BelongsTo {
         return $this->belongsTo(Subject::class);
     }
 

@@ -30,7 +30,7 @@ class Lesson extends Model
         'school_class_id' => null,
     ];
 
-    public function subjects():BelongsTo {
+    public function subject():BelongsTo {
         return $this->belongsTo(Subject::class);
     }
 
@@ -38,7 +38,7 @@ class Lesson extends Model
         return $this->hasMany(Attendance::class, 'student_id');
     }
 
-    public function schoolClasses():BelongsTo {
+    public function schoolClass():BelongsTo {
         return $this->belongsTo(SchoolClass::class);
     }
 
