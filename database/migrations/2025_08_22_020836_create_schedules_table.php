@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_schedule', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->date('day');
             $table->string('hour');
-            $table->int('semester');
+            $table->integer('semester');
             $table->foreignId('subject_id')->nullable();
             $table->foreignId('school_class_id')->nullable();
             $table->timestamps();

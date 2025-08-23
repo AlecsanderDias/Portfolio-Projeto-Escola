@@ -3,6 +3,7 @@
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SchoolClassController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserInformationController;
@@ -19,3 +20,4 @@ Route::resource('/schoolClasses', SchoolClassController::class)->except('show')-
 Route::resource('/subjects', SubjectController::class)->except('show')->middleware('auth');
 Route::resource('/grades', GradeController::class)->except('show')->middleware('auth');
 Route::resource('/lessons', LessonController::class)->except('show')->middleware('auth');
+Route::resource('/schedules', ScheduleController::class)->except('show')->middleware('auth');
