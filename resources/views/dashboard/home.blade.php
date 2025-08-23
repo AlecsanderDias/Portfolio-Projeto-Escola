@@ -23,6 +23,9 @@
     <a href="{{ route('lessons.index') }}">
         <button>Aulas</button>
     </a>
+    <a href="{{ route('schedules.index') }}">
+        <button>Cronogramas</button>
+    </a>
     <form action="{{ route('logout') }}" method="post">
         @csrf
         <button type="submit">Logout</button>

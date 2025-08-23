@@ -32,4 +32,8 @@ class Schedule extends Model
     public function schoolClass():BelongsTo {
         return $this->belongsTo(SchoolClass::class);
     }
+
+    static function getAllSchedules() {
+        return Schedule::all(['id','day','hour','subject_id','school_class_id'])->toArray();
+    }
 }
