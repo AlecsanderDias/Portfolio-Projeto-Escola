@@ -84,6 +84,14 @@ class Constants {
         'Mon', 'Tue', 'Wed', 'Thu', 'Fri'
     ];
 
+    const SCHOOL_DAYS_NAME = [
+        'Mon' => 'Segunda', 
+        'Tue' => 'Terça', 
+        'Wed' => 'Quarta', 
+        'Thu' => 'Quinta', 
+        'Fri' => 'Sexta',
+    ];
+
     const HOLIDAYS = [
 
     ];
