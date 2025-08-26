@@ -36,4 +36,8 @@ class Schedule extends Model
     static function getAllSchedules() {
         return Schedule::all(['id','day','hour','subject_id','school_class_id'])->toArray();
     }
+
+    static function createSchedule(array $data) {
+        dd($data);
+    }
 }

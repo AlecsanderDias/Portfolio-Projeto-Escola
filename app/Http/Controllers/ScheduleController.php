@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants;
+use App\Http\Requests\CreateScheduleRequest;
+use App\Models\Schedule;
+use App\Models\SchoolClass;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
@@ -11,7 +16,8 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        return view('schedule.index');
+        $schedules = Schedule::getAllSchedules();
+        return view('schedule.index', ['schedules' => $schedules]);
     }
 
     /**
@@ -19,15 +25,27 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        //
+        $days = Constants::SCHOOL_DAYS_NAME;
+        $hours = Constants::LESSONS_SCHEDULE;
+        $subjects = Subject::getAllSubjectsNames();
+        $schoolClasses = SchoolClass::getAllSchoolClassesNames();
+
+        // dd($days, $hours, $subjects, $schoolClasses);
+        return view('schedule.createForm', [
+            'days' => $days,
+            'hours' => $hours,
+            'subjects' => $subjects,
+            'schoolClasses' => $schoolClasses,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateScheduleRequest $request)
     {
-        //
+        Schedule::createSchedule($request->all());
+        return route('schedules.index');   
     }
 
     /**

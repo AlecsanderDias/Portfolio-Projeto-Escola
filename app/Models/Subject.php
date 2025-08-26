@@ -66,4 +66,8 @@ class Subject extends Model
     static function getAllSubjectsIdArray() {
         return Subject::all('id')->toArray();
     }
+
+    static function getAllSubjectsNames() {
+        return Subject::all(['id','subject_name']);
+    }
 }
