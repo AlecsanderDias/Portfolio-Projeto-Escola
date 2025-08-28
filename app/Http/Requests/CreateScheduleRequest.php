@@ -24,7 +24,7 @@ class CreateScheduleRequest extends FormRequest
         return [
             'day' => 'required|string',
             'hour' => 'required|string',
-            'semester' => 'required|string',
+            'semester' => 'required|string|between:1,2',
             'subject' => 'required|integer',
             'school_class' => 'required|integer',
         ];
@@ -33,7 +33,27 @@ class CreateScheduleRequest extends FormRequest
     public function messages()
     {
         return [
-
+            'day' => [
+                'required' => "O campo Dia é obrigatório",
+                'string' => "O valor do campo Dia é inválido",
+            ],
+            'hour' => [
+                'required' => "O campo Horário é obrigatório",
+                'string' => "O valor do campo Horário é inválido"
+            ],
+            'semester' => [
+                'required' => "O campo Semestre é obrigatório",
+                'integer' => "O valor do campo Semestre é inválido",
+                'between' => "O valor do campo Semestre é inválido"
+            ],
+            'subject' => [
+                'required' => "O campo Matéria é obrigatório",
+                'integer' => "O valor do campo Matéria é inválido"
+            ],
+            'school_class' => [
+                'required' => "O campo Turma é obrigatório",
+                'integer' => "O valor do campo Turma é inválido"
+            ],
         ];
     }
 }

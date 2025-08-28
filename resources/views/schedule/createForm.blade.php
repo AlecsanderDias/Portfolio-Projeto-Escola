@@ -16,8 +16,8 @@
         <div>
             <label for="hour">Horário:</label>
             <select name="hour" id="hour">
-                @foreach ($hours as $key => $hour)
-                    <option value="{{ $key }}">{{ $hour }}</option>
+                @foreach ($hours as $hour)
+                    <option value="{{ $hour }}">{{ $hour }}</option>
                 @endforeach
             </select>
         </div>
