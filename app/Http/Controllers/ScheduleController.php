@@ -44,8 +44,8 @@ class ScheduleController extends Controller
      */
     public function store(CreateScheduleRequest $request)
     {
-        Schedule::createSchedule($request->all());
-        return route('schedules.index');   
+        Schedule::create($request->all());
+        return redirect()->route('schedules.index')->with('message', ['Cronograma criado com sucesso!']);   
     }
 
     /**
@@ -61,7 +61,18 @@ class ScheduleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $schedule = Schedule::getScheduleById($id);
+        $days = Constants::SCHOOL_DAYS_NAME;
+        $hours = Constants::LESSONS_SCHEDULE;
+        $subjects = Subject::getAllSubjectsNames();
+        $schoolClasses = SchoolClass::getAllSchoolClassesNames();
+        return view('schedule.updateForm', [
+            'schedule' => $schedule,
+            'days' => $days,
+            'hours' => $hours,
+            'subjects' => $subjects,
+            'schoolClasses' => $schoolClasses,
+        ]);
     }
 
     /**
@@ -69,7 +80,7 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        dd($request, $id);
     }
 
     /**
