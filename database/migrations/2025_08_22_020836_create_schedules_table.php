@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->date('day');
+            $table->string('day');
             $table->string('hour');
             $table->integer('semester');
             $table->foreignId('subject_id')->nullable();
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_schedule');
+        Schema::dropIfExists('schedules');
     }
 };
