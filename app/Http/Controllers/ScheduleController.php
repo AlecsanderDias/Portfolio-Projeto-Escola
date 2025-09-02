@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Constants;
 use App\Http\Requests\CreateScheduleRequest;
+use App\Http\Requests\UpdateFormRequest;
+use App\Http\Requests\UpdateScheduleRequest;
 use App\Models\Schedule;
 use App\Models\SchoolClass;
 use App\Models\Subject;
@@ -78,9 +80,10 @@ class ScheduleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateScheduleRequest $request, string $id)
     {
-        dd($request, $id);
+        Schedule::updateScheduleById($id, $request->all());
+        return redirect()->route('schedules.index')->with('message', ["O Cronograma de id => $id foi alterado com sucesso"]);
     }
 
     /**
@@ -88,6 +91,8 @@ class ScheduleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $schedule = Schedule::find($id);
+        $schedule->delete();
+        return redirect()->route('schedules.index')->with('message', ["O Cronograma com id => $id foi deletada com sucesso!"]);
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateScheduleRequest extends FormRequest
+class UpdateScheduleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,8 @@ class CreateScheduleRequest extends FormRequest
             'day' => 'required|string',
             'hour' => 'required|string',
             'semester' => 'required|string|between:1,2',
-            'subject' => 'required|integer',
-            'school_class' => 'required|integer',
+            'subject_id' => 'required|integer',
+            'school_class_id' => 'required|integer',
         ];
     }
 

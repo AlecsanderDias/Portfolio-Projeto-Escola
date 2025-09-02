@@ -40,4 +40,10 @@ class Schedule extends Model
     static function getScheduleById(int $id) {
         return Schedule::get(['id','day','hour','subject_id','school_class_id'])->find($id);
     }
+
+    static function updateScheduleById(int $id, array $data) {
+        $schedule = new Schedule($data);
+        Schedule::find($id)->update($schedule->getAttributes());
+        return $schedule; 
+    }
 }

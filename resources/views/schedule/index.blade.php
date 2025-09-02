@@ -14,11 +14,11 @@
                     <a href="{{ route('schedules.edit', $items['id']) }}">
                         <button>Editar</button>
                     </a>
-                    {{-- <form action="{{ route('schedules.destroy', $items['id']) }}" method="POST">
+                    <form action="{{ route('schedules.destroy', $items['id']) }}" method="POST">
                         @method('DELETE')
                         @csrf
                         <button type="submit">Deletar</button>
-                    </form> --}}
+                    </form>
                 </li>
             @endforeach
         </ul>
