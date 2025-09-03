@@ -46,4 +46,8 @@ class Schedule extends Model
         Schedule::find($id)->update($schedule->getAttributes());
         return $schedule; 
     }
+
+    static function createScheduleBySchoolClass(int $schoolClassId) {
+        
+    }
 }
