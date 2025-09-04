@@ -67,8 +67,8 @@ class Constants {
 
     const SUBJECTS_LESSONS_QUANTITY = [
         'Matemática' => 3,
-        'Português' => 3,
         'Química' => 2,
+        'Português' => 3,
         'Física' => 2,
         'Geografia' => 2,
         'Biologia' => 2,
