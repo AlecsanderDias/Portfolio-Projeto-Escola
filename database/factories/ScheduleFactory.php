@@ -23,9 +23,9 @@ class ScheduleFactory extends Factory
         $hour = rand(0, count(Constants::LESSONS_SCHEDULE)-1);
         $semester = rand(1,2);
         $maxSubjectId = max(Subject::getAllSubjectsIdArray());
-        $subject = rand(1, $maxSubjectId);
         $maxSchoolClassId = max(SchoolClass::getAllSchoolClassesIdArray());
-        $schoolClass = rand(1, $maxSchoolClassId);
+        $subject = rand(1, $maxSubjectId['id']);
+        $schoolClass = rand(1, $maxSchoolClassId['id']);
         return [
             'day' => $day,
             'hour' => $hour,
